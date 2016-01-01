@@ -9,6 +9,8 @@ public class AddMonthlyEmployee {
     }
 
     public void execute(int employeeId, String name, String address, double salary) {
-        payrollDB.addEmployee(employeeId, new Employee(name, address, salary));
+        Employee employee = new Employee(name, address);
+        employee.setPaymentType(new MonthlyPayment(salary));
+        payrollDB.addEmployee(employeeId, employee);
     }
 }
