@@ -26,4 +26,14 @@ public class AddMonthlyEmployeeTest {
         Employee employee = payrollDB.getEmployee(1);
         assertTrue(employee.getPaymentType() instanceof MonthlyPayment);
     }
+
+    @Test
+    public void setsThePaymentScheduleAsMonthly() {
+        PayrollDBFacade payrollDB      = new PayrollDBFacade();
+        AddMonthlyEmployee addMonthlyE = new AddMonthlyEmployee(payrollDB);
+        addMonthlyE.execute(1, "Squido", "FishBowl", 1000.0);
+
+        Employee employee = payrollDB.getEmployee(1);
+        assertTrue(employee.getPaymentSchedule() instanceof MonthlySchedule);
+    }
 }

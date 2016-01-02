@@ -11,6 +11,7 @@ public class AddMonthlyEmployee {
     public void execute(int employeeId, String name, String address, double salary) {
         Employee employee = new Employee(name, address);
         employee.setPaymentType(new MonthlyPayment(salary));
+        employee.setPaymentSchedule(new MonthlySchedule());
         payrollDB.addEmployee(employeeId, employee);
     }
 }

@@ -4,6 +4,7 @@ public class Employee {
 
     private String name;
     private MonthlyPayment paymentType;
+    private MonthlySchedule paymentSchedule;
 
     public Employee(String name, String address) {
         this.name = name;
@@ -19,5 +20,13 @@ public class Employee {
 
     public MonthlyPayment getPaymentType() {
         return paymentType;
+    }
+
+    public void setPaymentSchedule(MonthlySchedule paymentSchedule) {
+        this.paymentSchedule = paymentSchedule;
+    }
+
+    public MonthlySchedule getPaymentSchedule() {
+        return paymentSchedule;
     }
 }
