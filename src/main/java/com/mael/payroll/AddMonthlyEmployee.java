@@ -8,10 +8,10 @@ public class AddMonthlyEmployee {
         this.payrollDB = payrollDB;
     }
 
-    public void execute(int employeeId, String name, String address, double salary) {
+    public void execute(int employeeId, String name, String address, double monthlyRate) {
         Employee employee = new Employee(name, address);
 
-        employee.setPaymentType(new MonthlyPayment(salary));
+        employee.setPaymentType(new MonthlyPayment(monthlyRate));
         employee.setPaymentSchedule(new MonthlySchedule());
         employee.setPaymentMethod(new HoldMethod());
 
