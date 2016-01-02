@@ -3,7 +3,7 @@ package com.mael.payroll;
 public class Employee {
 
     private String name;
-    private MonthlyPayment paymentType;
+    private PaymentType paymentType;
     private MonthlySchedule paymentSchedule;
     private HoldMethod paymentMethod;
 
@@ -15,11 +15,11 @@ public class Employee {
         return name;
     }
 
-    public void setPaymentType(MonthlyPayment paymentType) {
+    public void setPaymentType(PaymentType paymentType) {
         this.paymentType = paymentType;
     }
 
-    public MonthlyPayment getPaymentType() {
+    public PaymentType getPaymentType() {
         return paymentType;
     }
 
