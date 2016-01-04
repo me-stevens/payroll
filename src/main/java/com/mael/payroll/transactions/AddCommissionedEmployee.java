@@ -11,20 +11,22 @@ public class AddCommissionedEmployee implements AddEmployeeTransaction {
     private int employeeId;
     private String name;
     private String address;
+    private double monthlyRate;
     private double commission;
     private PayrollDBFacade payrollDB;
 
-    public AddCommissionedEmployee(int employeeId, String name, String address, double commission) {
-        this.employeeId = employeeId;
-        this.name       = name;
-        this.address    = address;
-        this.commission = commission;
+    public AddCommissionedEmployee(int employeeId, String name, String address, double monthlyRate, double commission) {
+        this.employeeId  = employeeId;
+        this.name        = name;
+        this.address     = address;
+        this.monthlyRate = monthlyRate;
+        this.commission  = commission;
     }
 
     public void execute() {
         Employee employee = new Employee(name, address);
 
-        employee.setPaymentType(new CommissionedPayment(commission));
+        employee.setPaymentType(new CommissionedPayment(monthlyRate, commission));
         employee.setPaymentSchedule(new CommissionedSchedule());
         employee.setPaymentMethod(new HoldMethod());
 

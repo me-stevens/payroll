@@ -16,7 +16,7 @@ public class AddCommissionedEmployeeTest {
     @Before
     public void setUp() {
         PayrollDBFacade payrollDB               = new PayrollDBFacade();
-        AddEmployeeTransaction addCommissionedE = new AddCommissionedEmployee(1, "Squiddo", "FishBowl", 1000.0);
+        AddEmployeeTransaction addCommissionedE = new AddCommissionedEmployee(1, "Squiddo", "FishBowl", 1000.0, 2.0);
         addCommissionedE.addDB(payrollDB);
 
         addCommissionedE.execute();
