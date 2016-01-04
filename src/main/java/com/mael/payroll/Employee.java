@@ -4,7 +4,7 @@ public class Employee {
 
     private String name;
     private PaymentType paymentType;
-    private MonthlySchedule paymentSchedule;
+    private PaymentSchedule paymentSchedule;
     private HoldMethod paymentMethod;
 
     public Employee(String name, String address) {
@@ -23,11 +23,11 @@ public class Employee {
         return paymentType;
     }
 
-    public void setPaymentSchedule(MonthlySchedule paymentSchedule) {
+    public void setPaymentSchedule(PaymentSchedule paymentSchedule) {
         this.paymentSchedule = paymentSchedule;
     }
 
-    public MonthlySchedule getPaymentSchedule() {
+    public PaymentSchedule getPaymentSchedule() {
         return paymentSchedule;
     }
 

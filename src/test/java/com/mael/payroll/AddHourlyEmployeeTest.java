@@ -26,4 +26,14 @@ public class AddHourlyEmployeeTest {
         Employee employee = payrollDB.getEmployee(1);
         assertTrue(employee.getPaymentType() instanceof HourlyPayment);
     }
+
+    @Test
+    public void setsThePaymentScheduleAsHourly() {
+        PayrollDBFacade payrollDB    = new PayrollDBFacade();
+        AddHourlyEmployee addHourlyE = new AddHourlyEmployee(payrollDB);
+        addHourlyE.execute(1, "Squiddo", "FishBowl", 1000.0);
+
+        Employee employee = payrollDB.getEmployee(1);
+        assertTrue(employee.getPaymentSchedule() instanceof HourlySchedule);
+    }
 }
