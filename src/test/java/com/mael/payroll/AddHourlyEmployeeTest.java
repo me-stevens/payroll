@@ -32,4 +32,9 @@ public class AddHourlyEmployeeTest {
     public void setsThePaymentScheduleAsHourly() {
         assertTrue(employee.getPaymentSchedule() instanceof HourlySchedule);
     }
+
+    @Test
+    public void setsThePaymentMethodAsHold() {
+        assertTrue(employee.getPaymentMethod() instanceof HoldMethod);
+    }
 }

@@ -33,4 +33,9 @@ public class AddCommissionedEmployeeTest {
     public void setsThePaymentScheduleAsCommissioned() {
         assertTrue(employee.getPaymentSchedule() instanceof CommissionedSchedule);
     }
+
+    @Test
+    public void setsThePaymentMethodAsHold() {
+        assertTrue(employee.getPaymentMethod() instanceof HoldMethod);
+    }
 }

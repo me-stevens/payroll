@@ -10,8 +10,11 @@ public class AddHourlyEmployee {
 
     public void execute(int employeeId, String name, String address, double hourlyRate) {
         Employee employee = new Employee(name, address);
+
         employee.setPaymentType(new HourlyPayment(hourlyRate));
         employee.setPaymentSchedule(new HourlySchedule());
+        employee.setPaymentMethod(new HoldMethod());
+
         payrollDB.addEmployee(employeeId, employee);
     }
 }
