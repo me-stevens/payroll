@@ -2,13 +2,20 @@ package com.mael.payroll;
 
 public class AddCommissionedEmployee {
 
+    private int employeeId;
+    private String name;
+    private String address;
+    private double commission;
     private PayrollDBFacade payrollDB;
 
-    public AddCommissionedEmployee(PayrollDBFacade payrollDB) {
-        this.payrollDB = payrollDB;
+    public AddCommissionedEmployee(int employeeId, String name, String address, double commission) {
+        this.employeeId = employeeId;
+        this.name       = name;
+        this.address    = address;
+        this.commission = commission;
     }
 
-    public void execute(int employeeId, String name, String address, double commission) {
+    public void execute() {
         Employee employee = new Employee(name, address);
 
         employee.setPaymentType(new CommissionedPayment(commission));
@@ -16,5 +23,9 @@ public class AddCommissionedEmployee {
         employee.setPaymentMethod(new HoldMethod());
 
         payrollDB.addEmployee(employeeId, employee);
+    }
+
+    public void addDB(PayrollDBFacade payrollDB) {
+        this.payrollDB = payrollDB;
     }
 }

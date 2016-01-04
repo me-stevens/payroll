@@ -2,13 +2,20 @@ package com.mael.payroll;
 
 public class AddMonthlyEmployee {
 
+    private int employeeId;
+    private String name;
+    private String address;
+    private double monthlyRate;
     private PayrollDBFacade payrollDB;
 
-    public AddMonthlyEmployee(PayrollDBFacade payrollDB) {
-        this.payrollDB = payrollDB;
+    public AddMonthlyEmployee(int employeeId, String name, String address, double monthlyRate) {
+        this.employeeId  = employeeId;
+        this.name        = name;
+        this.address     = address;
+        this.monthlyRate = monthlyRate;
     }
 
-    public void execute(int employeeId, String name, String address, double monthlyRate) {
+    public void execute() {
         Employee employee = new Employee(name, address);
 
         employee.setPaymentType(new MonthlyPayment(monthlyRate));
@@ -16,5 +23,9 @@ public class AddMonthlyEmployee {
         employee.setPaymentMethod(new HoldMethod());
 
         payrollDB.addEmployee(employeeId, employee);
+    }
+
+    public void addDB(PayrollDBFacade payrollDB) {
+        this.payrollDB = payrollDB;
     }
 }

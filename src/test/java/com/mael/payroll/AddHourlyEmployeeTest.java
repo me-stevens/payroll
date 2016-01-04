@@ -7,14 +7,16 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class AddHourlyEmployeeTest {
+
     private Employee employee;
 
     @Before
     public void setUp() {
         PayrollDBFacade payrollDB    = new PayrollDBFacade();
-        AddHourlyEmployee addHourlyE = new AddHourlyEmployee(payrollDB);
+        AddHourlyEmployee addHourlyE = new AddHourlyEmployee(1, "Squiddo", "FishBowl", 1000.0);
+        addHourlyE.addDB(payrollDB);
 
-        addHourlyE.execute(1, "Squiddo", "FishBowl", 1000.0);
+        addHourlyE.execute();
         employee = payrollDB.getEmployee(1);
     }
 

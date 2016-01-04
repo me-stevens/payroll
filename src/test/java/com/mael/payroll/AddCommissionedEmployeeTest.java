@@ -13,9 +13,10 @@ public class AddCommissionedEmployeeTest {
     @Before
     public void setUp() {
         PayrollDBFacade payrollDB = new PayrollDBFacade();
-        AddCommissionedEmployee addCommissionedE = new AddCommissionedEmployee(payrollDB);
+        AddCommissionedEmployee addCommissionedE = new AddCommissionedEmployee(1, "Squiddo", "FishBowl", 1000.0);
+        addCommissionedE.addDB(payrollDB);
 
-        addCommissionedE.execute(1, "Squiddo", "FishBowl", 1000.0);
+        addCommissionedE.execute();
         employee = payrollDB.getEmployee(1);
     }
 
