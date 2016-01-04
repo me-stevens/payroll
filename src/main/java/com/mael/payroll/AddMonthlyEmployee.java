@@ -1,6 +1,6 @@
 package com.mael.payroll;
 
-public class AddMonthlyEmployee {
+public class AddMonthlyEmployee implements AddEmployeeTransaction {
 
     private int employeeId;
     private String name;
