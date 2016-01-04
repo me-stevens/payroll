@@ -1,4 +1,4 @@
-package com.mael.payroll;
+package com.mael.payroll.paymentSchedules;
 
 public class MonthlySchedule implements PaymentSchedule {
 }

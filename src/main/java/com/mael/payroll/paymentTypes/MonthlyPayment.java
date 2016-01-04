@@ -1,4 +1,4 @@
-package com.mael.payroll;
+package com.mael.payroll.paymentTypes;
 
 public class MonthlyPayment implements PaymentType {
     private double monthlyRate;

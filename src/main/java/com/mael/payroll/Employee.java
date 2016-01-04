@@ -1,5 +1,8 @@
 package com.mael.payroll;
 
+import com.mael.payroll.paymentSchedules.PaymentSchedule;
+import com.mael.payroll.paymentTypes.PaymentType;
+
 public class Employee {
 
     private String name;

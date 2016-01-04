@@ -1,7 +1,7 @@
-package com.mael.payroll;
+package com.mael.payroll.paymentTypes;
 
 public class CommissionedPayment implements PaymentType {
-    private final double commission;
+    private double commission;
 
     public CommissionedPayment(double commission) {
         this.commission = commission;

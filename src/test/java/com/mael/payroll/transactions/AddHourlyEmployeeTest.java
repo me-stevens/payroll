@@ -1,5 +1,8 @@
-package com.mael.payroll;
+package com.mael.payroll.transactions;
 
+import com.mael.payroll.*;
+import com.mael.payroll.paymentSchedules.HourlySchedule;
+import com.mael.payroll.paymentTypes.HourlyPayment;
 import org.junit.Before;
 import org.junit.Test;
 

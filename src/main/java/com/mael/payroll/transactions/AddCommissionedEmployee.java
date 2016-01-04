@@ -1,4 +1,10 @@
-package com.mael.payroll;
+package com.mael.payroll.transactions;
+
+import com.mael.payroll.Employee;
+import com.mael.payroll.HoldMethod;
+import com.mael.payroll.PayrollDBFacade;
+import com.mael.payroll.paymentSchedules.CommissionedSchedule;
+import com.mael.payroll.paymentTypes.CommissionedPayment;
 
 public class AddCommissionedEmployee implements AddEmployeeTransaction {
 
