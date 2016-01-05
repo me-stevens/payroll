@@ -29,6 +29,11 @@ public class AddHourlyEmployeeTest {
     }
 
     @Test
+    public void addsTheRightHourlyPay() {
+        assertEquals(1000.0, ((HourlyPayment)employee.getPaymentType()).getHourlyRate(), 0.001);
+    }
+
+    @Test
     public void setsThePaymentTypeASHourly() {
         assertTrue(employee.getPaymentType() instanceof HourlyPayment);
     }

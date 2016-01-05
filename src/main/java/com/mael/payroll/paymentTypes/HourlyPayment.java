@@ -6,4 +6,8 @@ public class HourlyPayment implements PaymentType {
     public HourlyPayment(double hourlyRate) {
         this.hourlyRate = hourlyRate;
     }
+
+    public double getHourlyRate() {
+        return hourlyRate;
+    }
 }
