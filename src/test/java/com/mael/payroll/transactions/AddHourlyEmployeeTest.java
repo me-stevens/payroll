@@ -15,16 +15,17 @@ public class AddHourlyEmployeeTest {
 
     @Before
     public void setUp() {
-        PayrollDBFacade payrollDB         = new PayrollDBFacade();
-        AddEmployeeTransaction addHourlyE = new AddHourlyEmployee(payrollDB, 1, "Squiddo", "FishBowl", 1000.0);
+        PayrollDBFacade payrollDB = new PayrollDBFacade();
+        AddEmployeeTransaction addHourlyEmployee = new AddHourlyEmployee(payrollDB, 1, "Squiddo", "FishBowl", 1000.0);
 
-        addHourlyE.execute();
+        addHourlyEmployee.execute();
         employee = payrollDB.getEmployee(1);
     }
 
     @Test
     public void addsHourlyEmployeeToTheDB() {
-        assertEquals("Squiddo", employee.getName());
+        assertEquals("Squiddo",  employee.getName());
+        assertEquals("FishBowl", employee.getAddress());
     }
 
     @Test

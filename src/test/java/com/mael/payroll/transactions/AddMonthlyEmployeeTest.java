@@ -15,16 +15,17 @@ public class AddMonthlyEmployeeTest {
 
     @Before
     public void setUp() {
-        PayrollDBFacade payrollDB          = new PayrollDBFacade();
-        AddEmployeeTransaction addMonthlyE = new AddMonthlyEmployee(payrollDB, 1, "Squiddo", "FishBowl", 1000.0);
+        PayrollDBFacade payrollDB = new PayrollDBFacade();
+        AddEmployeeTransaction addMonthlyEmployee = new AddMonthlyEmployee(payrollDB, 1, "Squiddo", "FishBowl", 1000.0);
 
-        addMonthlyE.execute();
+        addMonthlyEmployee.execute();
         employee = payrollDB.getEmployee(1);
     }
 
     @Test
     public void addsMonthlyEmployeeToTheDB() {
-        assertEquals("Squiddo", employee.getName());
+        assertEquals("Squiddo",  employee.getName());
+        assertEquals("FishBowl", employee.getAddress());
     }
 
     @Test

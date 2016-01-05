@@ -6,12 +6,14 @@ import com.mael.payroll.paymentTypes.PaymentType;
 public class Employee {
 
     private String name;
+    private String address;
     private PaymentType paymentType;
     private PaymentSchedule paymentSchedule;
     private HoldMethod paymentMethod;
 
     public Employee(String name, String address) {
-        this.name = name;
+        this.name    = name;
+        this.address = address;
     }
 
     public String getName() {
@@ -40,5 +42,9 @@ public class Employee {
 
     public HoldMethod getPaymentMethod() {
         return paymentMethod;
+    }
+
+    public String getAddress() {
+        return address;
     }
 }
