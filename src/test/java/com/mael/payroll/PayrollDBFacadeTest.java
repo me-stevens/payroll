@@ -15,7 +15,7 @@ public class PayrollDBFacadeTest {
     }
 
     @Test(expected = PayrollDBFacade.EmployeeNotInDBException.class)
-    public void throwExceptionIfEmployeeNotInDB() {
+    public void throwsExceptionIfEmployeeNotInDB() {
         PayrollDBFacade payrollDB = new PayrollDBFacade();
         payrollDB.getEmployee(1);
     }

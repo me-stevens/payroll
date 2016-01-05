@@ -20,6 +20,10 @@ public class Employee {
         return name;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
     public void setPaymentType(PaymentType paymentType) {
         this.paymentType = paymentType;
     }
@@ -42,9 +46,5 @@ public class Employee {
 
     public HoldMethod getPaymentMethod() {
         return paymentMethod;
-    }
-
-    public String getAddress() {
-        return address;
     }
 }

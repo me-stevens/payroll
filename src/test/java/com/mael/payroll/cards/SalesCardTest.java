@@ -1,6 +1,5 @@
 package com.mael.payroll.cards;
 
-import com.mael.payroll.cards.SalesCard;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

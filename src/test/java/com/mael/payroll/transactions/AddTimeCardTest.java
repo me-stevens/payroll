@@ -13,7 +13,7 @@ public class AddTimeCardTest {
 
     private Employee employee;
     private PayrollDBFacade payrollDB;
-    private AddTimeCard timeCardTransaction;
+    private AddTimeCard addTimeCard;
 
     @Before
     public void setUp() {
@@ -26,8 +26,8 @@ public class AddTimeCardTest {
         addHourlyEmployee.execute();
         employee = payrollDB.getEmployee(1);
 
-        timeCardTransaction = new AddTimeCard(payrollDB, 1, 10001010, 8.0);
-        timeCardTransaction.execute();
+        addTimeCard = new AddTimeCard(payrollDB, 1, 10001010, 8.0);
+        addTimeCard.execute();
 
         TimeCard timeCard = ((HourlyPayment)employee.getPaymentType()).getTimeCard();
         assertEquals(10001010, timeCard.getDate());
@@ -40,7 +40,7 @@ public class AddTimeCardTest {
         addMonthlyEmployee.execute();
         employee = payrollDB.getEmployee(1);
 
-        timeCardTransaction = new AddTimeCard(payrollDB, 1, 10001010, 8.0);
-        timeCardTransaction.execute();
+        addTimeCard = new AddTimeCard(payrollDB, 1, 10001010, 8.0);
+        addTimeCard.execute();
     }
 }
