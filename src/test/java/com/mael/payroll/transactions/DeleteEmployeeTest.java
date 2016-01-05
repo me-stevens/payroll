@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 
 public class DeleteEmployeeTest {
 
-    @Test
+    @Test (expected = PayrollDBFacade.EmployeeNotInDBException.class)
     public void deletesEmployee() {
         PayrollDBFacade payrollDB      = new PayrollDBFacade();
         AddEmployee addMonthlyEmployee = new AddMonthlyEmployee(payrollDB, 1, "Squiddo", "FishBowl", 1000.0);
@@ -15,6 +15,6 @@ public class DeleteEmployeeTest {
         
         DeleteEmployee deleteEmployee = new DeleteEmployee(payrollDB, 1);
         deleteEmployee.execute();
-        assertEquals(null, payrollDB.getEmployee(1));
+        payrollDB.getEmployee(1);
     }
 }

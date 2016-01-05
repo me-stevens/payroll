@@ -11,14 +11,20 @@ public class PayrollDBFacade {
     }
 
     public void addEmployee(int employeeId, Employee employee) {
-        listOfEmployees.put(employeeId, employee);
+       listOfEmployees.put(employeeId, employee);
     }
 
     public Employee getEmployee(int employeeId) {
-        return listOfEmployees.get(employeeId);
+        if (listOfEmployees.containsKey(employeeId)) {
+            return listOfEmployees.get(employeeId);
+        }
+        throw new EmployeeNotInDBException();
     }
 
     public void deleteEmployee(int employeeId) {
         listOfEmployees.remove(employeeId);
+    }
+
+    public class EmployeeNotInDBException extends RuntimeException {
     }
 }
