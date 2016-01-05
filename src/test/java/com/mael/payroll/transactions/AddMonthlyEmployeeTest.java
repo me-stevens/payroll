@@ -12,6 +12,7 @@ import static org.junit.Assert.assertTrue;
 public class AddMonthlyEmployeeTest {
 
     private Employee employee;
+    MonthlyPayment monthlyPayment;
 
     @Before
     public void setUp() {
@@ -20,6 +21,7 @@ public class AddMonthlyEmployeeTest {
 
         addMonthlyEmployee.execute();
         employee = payrollDB.getEmployee(1);
+        monthlyPayment = (MonthlyPayment) employee.getPaymentType();
     }
 
     @Test
@@ -30,7 +32,7 @@ public class AddMonthlyEmployeeTest {
 
     @Test
     public void addsTheRightSalary() {
-        assertEquals(1000.0, ((MonthlyPayment)employee.getPaymentType()).getMonthlyRate(), 0.001);
+        assertEquals(1000.0, monthlyPayment.getMonthlyRate(), 0.001);
     }
 
     @Test

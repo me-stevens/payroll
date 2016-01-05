@@ -12,6 +12,7 @@ import static org.junit.Assert.assertTrue;
 public class AddCommissionedEmployeeTest {
 
     private Employee employee;
+    CommissionedPayment commissionedPayment;
 
     @Before
     public void setUp() {
@@ -20,6 +21,7 @@ public class AddCommissionedEmployeeTest {
 
         addCommissionedEmployee.execute();
         employee = payrollDB.getEmployee(1);
+        commissionedPayment = (CommissionedPayment) employee.getPaymentType();
     }
 
     @Test
@@ -30,12 +32,12 @@ public class AddCommissionedEmployeeTest {
 
     @Test
     public void addsTheRightSalary() {
-        assertEquals(1000.0, ((CommissionedPayment)employee.getPaymentType()).getMonthlyRate(), 0.001);
+        assertEquals(1000.0, commissionedPayment.getMonthlyRate(), 0.001);
     }
 
     @Test
     public void addsTheRightCommission() {
-        assertEquals(2.0, ((CommissionedPayment) employee.getPaymentType()).getCommission(), 0.001);
+        assertEquals(2.0, commissionedPayment.getCommission(), 0.001);
     }
 
     @Test

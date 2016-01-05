@@ -12,6 +12,7 @@ import static org.junit.Assert.assertTrue;
 public class AddHourlyEmployeeTest {
 
     private Employee employee;
+    HourlyPayment hourlyPayment;
 
     @Before
     public void setUp() {
@@ -20,6 +21,7 @@ public class AddHourlyEmployeeTest {
 
         addHourlyEmployee.execute();
         employee = payrollDB.getEmployee(1);
+        hourlyPayment = (HourlyPayment) employee.getPaymentType();
     }
 
     @Test
@@ -30,7 +32,7 @@ public class AddHourlyEmployeeTest {
 
     @Test
     public void addsTheRightHourlyPay() {
-        assertEquals(1000.0, ((HourlyPayment)employee.getPaymentType()).getHourlyRate(), 0.001);
+        assertEquals(1000.0, hourlyPayment.getHourlyRate(), 0.001);
     }
 
     @Test

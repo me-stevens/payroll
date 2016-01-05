@@ -3,8 +3,6 @@ package com.mael.payroll.transactions;
 import com.mael.payroll.PayrollDBFacade;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-
 public class DeleteEmployeeTest {
 
     @Test (expected = PayrollDBFacade.EmployeeNotInDBException.class)
