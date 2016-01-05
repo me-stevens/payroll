@@ -8,13 +8,14 @@ import com.mael.payroll.paymentTypes.HourlyPayment;
 
 public class AddHourlyEmployee implements AddEmployeeTransaction {
 
+    private PayrollDBFacade payrollDB;
     private int employeeId;
     private String name;
     private String address;
     private double hourlyRate;
-    private PayrollDBFacade payrollDB;
 
-    public AddHourlyEmployee(int employeeId, String name, String address, double hourlyRate) {
+    public AddHourlyEmployee(PayrollDBFacade payrollDB, int employeeId, String name, String address, double hourlyRate) {
+        this.payrollDB  = payrollDB;
         this.employeeId = employeeId;
         this.name       = name;
         this.address    = address;
@@ -29,9 +30,5 @@ public class AddHourlyEmployee implements AddEmployeeTransaction {
         employee.setPaymentMethod(new HoldMethod());
 
         payrollDB.addEmployee(employeeId, employee);
-    }
-
-    public void addDB(PayrollDBFacade payrollDB) {
-        this.payrollDB = payrollDB;
     }
 }

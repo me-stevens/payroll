@@ -8,13 +8,14 @@ import com.mael.payroll.paymentTypes.MonthlyPayment;
 
 public class AddMonthlyEmployee implements AddEmployeeTransaction {
 
+    private PayrollDBFacade payrollDB;
     private int employeeId;
     private String name;
     private String address;
     private double monthlyRate;
-    private PayrollDBFacade payrollDB;
 
-    public AddMonthlyEmployee(int employeeId, String name, String address, double monthlyRate) {
+    public AddMonthlyEmployee(PayrollDBFacade payrollDB, int employeeId, String name, String address, double monthlyRate) {
+        this.payrollDB   = payrollDB;
         this.employeeId  = employeeId;
         this.name        = name;
         this.address     = address;
@@ -29,9 +30,5 @@ public class AddMonthlyEmployee implements AddEmployeeTransaction {
         employee.setPaymentMethod(new HoldMethod());
 
         payrollDB.addEmployee(employeeId, employee);
-    }
-
-    public void addDB(PayrollDBFacade payrollDB) {
-        this.payrollDB = payrollDB;
     }
 }

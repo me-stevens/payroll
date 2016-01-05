@@ -8,14 +8,15 @@ import com.mael.payroll.paymentTypes.CommissionedPayment;
 
 public class AddCommissionedEmployee implements AddEmployeeTransaction {
 
+    private PayrollDBFacade payrollDB;
     private int employeeId;
     private String name;
     private String address;
     private double monthlyRate;
     private double commission;
-    private PayrollDBFacade payrollDB;
 
-    public AddCommissionedEmployee(int employeeId, String name, String address, double monthlyRate, double commission) {
+    public AddCommissionedEmployee(PayrollDBFacade payrollDB, int employeeId, String name, String address, double monthlyRate, double commission) {
+        this.payrollDB   = payrollDB;
         this.employeeId  = employeeId;
         this.name        = name;
         this.address     = address;
@@ -31,9 +32,5 @@ public class AddCommissionedEmployee implements AddEmployeeTransaction {
         employee.setPaymentMethod(new HoldMethod());
 
         payrollDB.addEmployee(employeeId, employee);
-    }
-
-    public void addDB(PayrollDBFacade payrollDB) {
-        this.payrollDB = payrollDB;
     }
 }

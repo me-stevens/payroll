@@ -16,8 +16,7 @@ public class AddHourlyEmployeeTest {
     @Before
     public void setUp() {
         PayrollDBFacade payrollDB         = new PayrollDBFacade();
-        AddEmployeeTransaction addHourlyE = new AddHourlyEmployee(1, "Squiddo", "FishBowl", 1000.0);
-        addHourlyE.addDB(payrollDB);
+        AddEmployeeTransaction addHourlyE = new AddHourlyEmployee(payrollDB, 1, "Squiddo", "FishBowl", 1000.0);
 
         addHourlyE.execute();
         employee = payrollDB.getEmployee(1);
