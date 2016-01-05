@@ -4,7 +4,7 @@ import com.mael.payroll.PayrollDBFacade;
 import com.mael.payroll.paymentSchedules.HourlySchedule;
 import com.mael.payroll.paymentTypes.HourlyPayment;
 
-public class AddHourlyEmployee extends AddEmployeeTransaction {
+public class AddHourlyEmployee extends AddEmployee {
 
     private double hourlyRate;
 

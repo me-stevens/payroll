@@ -16,7 +16,7 @@ public class AddMonthlyEmployeeTest {
     @Before
     public void setUp() {
         PayrollDBFacade payrollDB = new PayrollDBFacade();
-        AddEmployeeTransaction addMonthlyEmployee = new AddMonthlyEmployee(payrollDB, 1, "Squiddo", "FishBowl", 1000.0);
+        AddEmployee addMonthlyEmployee = new AddMonthlyEmployee(payrollDB, 1, "Squiddo", "FishBowl", 1000.0);
 
         addMonthlyEmployee.execute();
         employee = payrollDB.getEmployee(1);

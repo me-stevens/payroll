@@ -7,7 +7,7 @@ import com.mael.payroll.paymentSchedules.PaymentSchedule;
 import com.mael.payroll.paymentTypes.PaymentType;
 
 
-public abstract class AddEmployeeTransaction {
+public abstract class AddEmployee {
 
     private PayrollDBFacade payrollDB;
     private int employeeId;
@@ -18,7 +18,7 @@ public abstract class AddEmployeeTransaction {
     private PaymentSchedule paymentSchedule;
     private HoldMethod paymentMethod;
 
-    public AddEmployeeTransaction(PayrollDBFacade payrollDB, int employeeId, String name, String address) {
+    public AddEmployee(PayrollDBFacade payrollDB, int employeeId, String name, String address) {
         this.payrollDB  = payrollDB;
         this.employeeId = employeeId;
         this.name       = name;

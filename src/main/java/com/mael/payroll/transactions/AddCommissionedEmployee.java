@@ -4,7 +4,7 @@ import com.mael.payroll.PayrollDBFacade;
 import com.mael.payroll.paymentSchedules.CommissionedSchedule;
 import com.mael.payroll.paymentTypes.CommissionedPayment;
 
-public class AddCommissionedEmployee extends AddEmployeeTransaction {
+public class AddCommissionedEmployee extends AddEmployee {
 
     private double monthlyRate;
     private double commission;

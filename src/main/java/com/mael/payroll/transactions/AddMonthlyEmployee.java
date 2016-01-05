@@ -4,7 +4,7 @@ import com.mael.payroll.PayrollDBFacade;
 import com.mael.payroll.paymentSchedules.MonthlySchedule;
 import com.mael.payroll.paymentTypes.MonthlyPayment;
 
-public class AddMonthlyEmployee extends AddEmployeeTransaction {
+public class AddMonthlyEmployee extends AddEmployee {
 
     private double monthlyRate;
 
