@@ -13,6 +13,5 @@ public class AddMonthlyEmployee extends AddEmployee {
         this.monthlyRate = monthlyRate;
         setPaymentType(new MonthlyPayment(monthlyRate));
         setPaymentSchedule(new MonthlySchedule());
-        setPaymentMethod();
     }
 }

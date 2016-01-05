@@ -13,6 +13,5 @@ public class AddHourlyEmployee extends AddEmployee {
         this.hourlyRate = hourlyRate;
         setPaymentType(new HourlyPayment(hourlyRate));
         setPaymentSchedule(new HourlySchedule());
-        setPaymentMethod();
     }
 }

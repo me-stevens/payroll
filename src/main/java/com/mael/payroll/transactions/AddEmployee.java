@@ -16,7 +16,6 @@ public abstract class AddEmployee {
     private String address;
     private PaymentType paymentType;
     private PaymentSchedule paymentSchedule;
-    private HoldMethod paymentMethod;
 
     public AddEmployee(PayrollDBFacade payrollDB, int employeeId, String name, String address) {
         this.payrollDB  = payrollDB;
@@ -30,7 +29,7 @@ public abstract class AddEmployee {
 
         employee.setPaymentType(getPaymentType());
         employee.setPaymentSchedule(getPaymentSchedule());
-        employee.setPaymentMethod(getPaymentMethod());
+        employee.setPaymentMethod(new HoldMethod());
 
         payrollDB.addEmployee(employeeId, employee);
     }
@@ -49,13 +48,5 @@ public abstract class AddEmployee {
 
     private PaymentSchedule getPaymentSchedule() {
         return paymentSchedule;
-    }
-
-    public void setPaymentMethod() {
-        this.paymentMethod = new HoldMethod();
-    }
-
-    public HoldMethod getPaymentMethod() {
-        return paymentMethod;
     }
 }

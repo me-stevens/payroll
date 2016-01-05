@@ -15,6 +15,5 @@ public class AddCommissionedEmployee extends AddEmployee {
         this.commission  = commission;
         setPaymentType(new CommissionedPayment(monthlyRate, commission));
         setPaymentSchedule(new CommissionedSchedule());
-        setPaymentMethod();
     }
 }
