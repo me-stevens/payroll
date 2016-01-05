@@ -29,6 +29,16 @@ public class AddCommissionedEmployeeTest {
     }
 
     @Test
+    public void addsTheRightSalary() {
+        assertEquals(1000.0, ((CommissionedPayment)employee.getPaymentType()).getMonthlyRate(), 0.001);
+    }
+
+    @Test
+    public void addsTheRightCommission() {
+        assertEquals(2.0, ((CommissionedPayment) employee.getPaymentType()).getCommission(), 0.001);
+    }
+
+    @Test
     public void setsThePaymentTypeASCommissioned() {
         assertTrue(employee.getPaymentType() instanceof CommissionedPayment);
     }

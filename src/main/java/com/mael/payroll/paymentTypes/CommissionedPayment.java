@@ -8,4 +8,12 @@ public class CommissionedPayment implements PaymentType {
         this.monthlyRate = monthlyRate;
         this.commission  = commission;
     }
+
+    public double getMonthlyRate() {
+        return monthlyRate;
+    }
+
+    public double getCommission() {
+        return commission;
+    }
 }
