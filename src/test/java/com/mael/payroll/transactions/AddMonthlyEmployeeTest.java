@@ -29,6 +29,11 @@ public class AddMonthlyEmployeeTest {
     }
 
     @Test
+    public void addsTheRightSalary() {
+        assertEquals(1000.0, ((MonthlyPayment)employee.getPaymentType()).getMonthlyRate(), 0.001);
+    }
+
+    @Test
     public void setsThePaymentTypeAsMonthly() {
         assertTrue(employee.getPaymentType() instanceof MonthlyPayment);
     }

@@ -6,4 +6,8 @@ public class MonthlyPayment implements PaymentType {
     public MonthlyPayment(double monthlyRate) {
         this.monthlyRate = monthlyRate;
     }
+
+    public double getMonthlyRate() {
+        return monthlyRate;
+    }
 }
