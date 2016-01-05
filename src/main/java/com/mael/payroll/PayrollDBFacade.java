@@ -10,11 +10,15 @@ public class PayrollDBFacade {
         listOfEmployees = new HashMap<>();
     }
 
+    public void addEmployee(int employeeId, Employee employee) {
+        listOfEmployees.put(employeeId, employee);
+    }
+
     public Employee getEmployee(int employeeId) {
         return listOfEmployees.get(employeeId);
     }
 
-    public void addEmployee(int employeeId, Employee employee) {
-        listOfEmployees.put(employeeId, employee);
+    public void deleteEmployee(int employeeId) {
+        listOfEmployees.remove(employeeId);
     }
 }
