@@ -1,5 +1,6 @@
 package com.mael.payroll;
 
+import com.mael.payroll.paymentMethods.PaymentMethod;
 import com.mael.payroll.paymentSchedules.PaymentSchedule;
 import com.mael.payroll.paymentTypes.PaymentType;
 
@@ -9,7 +10,7 @@ public class Employee {
     private String address;
     private PaymentType paymentType;
     private PaymentSchedule paymentSchedule;
-    private HoldMethod paymentMethod;
+    private PaymentMethod paymentMethod;
 
     public Employee(String name, String address) {
         this.name    = name;
@@ -48,11 +49,11 @@ public class Employee {
         return paymentSchedule;
     }
 
-    public void setPaymentMethod(HoldMethod paymentMethod) {
+    public void setPaymentMethod(PaymentMethod paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
 
-    public HoldMethod getPaymentMethod() {
+    public PaymentMethod getPaymentMethod() {
         return paymentMethod;
     }
 }

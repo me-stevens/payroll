@@ -1,6 +1,7 @@
 package com.mael.payroll.transactions;
 
 import com.mael.payroll.*;
+import com.mael.payroll.paymentMethods.HoldMethod;
 import com.mael.payroll.paymentSchedules.WeeklySchedule;
 import com.mael.payroll.paymentTypes.HourlyPayment;
 import org.junit.Before;

@@ -1,7 +1,7 @@
 package com.mael.payroll.transactions;
 
 import com.mael.payroll.Employee;
-import com.mael.payroll.HoldMethod;
+import com.mael.payroll.paymentMethods.HoldMethod;
 import com.mael.payroll.PayrollDBFacade;
 import com.mael.payroll.paymentSchedules.PaymentSchedule;
 import com.mael.payroll.paymentTypes.PaymentType;

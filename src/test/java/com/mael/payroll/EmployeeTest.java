@@ -1,5 +1,7 @@
 package com.mael.payroll;
 
+import com.mael.payroll.paymentMethods.HoldMethod;
+import com.mael.payroll.paymentMethods.PaymentMethod;
 import com.mael.payroll.paymentSchedules.WeeklySchedule;
 import com.mael.payroll.paymentSchedules.PaymentSchedule;
 import com.mael.payroll.paymentTypes.HourlyPayment;
@@ -52,7 +54,7 @@ public class EmployeeTest {
 
     @Test
     public void setsPaymentMethod() {
-        HoldMethod method = new HoldMethod();
+        PaymentMethod method = new HoldMethod();
         employee.setPaymentMethod(method);
         assertEquals(method, employee.getPaymentMethod());
     }
