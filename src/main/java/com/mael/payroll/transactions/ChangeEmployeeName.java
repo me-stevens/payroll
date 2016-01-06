@@ -3,19 +3,16 @@ package com.mael.payroll.transactions;
 import com.mael.payroll.Employee;
 import com.mael.payroll.PayrollDBFacade;
 
-public class ChangeEmployeeName {
-    private PayrollDBFacade payrollDB;
-    private int employeeId;
+public class ChangeEmployeeName extends ChangeEmployee {
+
     private String name;
 
     public ChangeEmployeeName(PayrollDBFacade payrollDB, int employeeId, String name) {
-        this.payrollDB  = payrollDB;
-        this.employeeId = employeeId;
-        this.name       = name;
+        super(payrollDB, employeeId);
+        this.name = name;
     }
 
-    public void execute() {
-        Employee employee = payrollDB.getEmployee(employeeId);
+    public void change(Employee employee) {
         employee.setName(name);
     }
 }

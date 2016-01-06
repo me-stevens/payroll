@@ -5,19 +5,16 @@ import com.mael.payroll.PayrollDBFacade;
 import com.mael.payroll.paymentSchedules.WeeklySchedule;
 import com.mael.payroll.paymentTypes.HourlyPayment;
 
-public class ChangeEmployeeToHourly {
-    private PayrollDBFacade payrollDB;
-    private int employeeId;
+public class ChangeEmployeeToHourly extends ChangeEmployee {
+
     private double hourlyRate;
 
     public ChangeEmployeeToHourly(PayrollDBFacade payrollDB, int employeeId, double hourlyRate) {
-        this.payrollDB = payrollDB;
-        this.employeeId = employeeId;
+        super(payrollDB, employeeId);
         this.hourlyRate = hourlyRate;
     }
 
-    public void execute() {
-        Employee employee = payrollDB.getEmployee(employeeId);
+    public void change(Employee employee) {
         employee.setPaymentType(new HourlyPayment(hourlyRate));
         employee.setPaymentSchedule(new WeeklySchedule());
     }
