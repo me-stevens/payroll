@@ -29,7 +29,7 @@ public abstract class AddEmployee {
 
         employee.setPaymentType(getPaymentType());
         employee.setPaymentSchedule(getPaymentSchedule());
-        employee.setPaymentMethod(new HoldMethod());
+        employee.setPaymentMethod(new HoldMethod(address));
 
         payrollDB.addEmployee(employeeId, employee);
     }

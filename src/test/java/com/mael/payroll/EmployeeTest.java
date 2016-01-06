@@ -54,7 +54,7 @@ public class EmployeeTest {
 
     @Test
     public void setsPaymentMethod() {
-        PaymentMethod method = new HoldMethod();
+        PaymentMethod method = new HoldMethod("address");
         employee.setPaymentMethod(method);
         assertEquals(method, employee.getPaymentMethod());
     }
