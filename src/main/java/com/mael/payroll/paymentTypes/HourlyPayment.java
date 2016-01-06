@@ -14,11 +14,11 @@ public class HourlyPayment implements PaymentType {
         return hourlyRate;
     }
 
-    public TimeCard getTimeCard() {
-        return timeCard;
+    public void setTimeCard(TimeCard timeCard) {
+        this.timeCard = timeCard;
     }
 
-    public void addTimeCard(TimeCard timeCard) {
-        this.timeCard = timeCard;
+    public TimeCard getTimeCard() {
+        return timeCard;
     }
 }

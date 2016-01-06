@@ -22,7 +22,7 @@ public class AddTimeCard {
         Employee employee = payrollDB.getEmployee(employeeID);
 
         try {
-            ((HourlyPayment) employee.getPaymentType()).addTimeCard(new TimeCard(date, hours));
+            ((HourlyPayment) employee.getPaymentType()).setTimeCard(new TimeCard(date, hours));
         } catch (ClassCastException e) {
             throw new PaymentTypeMismatchException();
         }
