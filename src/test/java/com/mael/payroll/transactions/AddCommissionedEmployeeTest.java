@@ -1,7 +1,7 @@
 package com.mael.payroll.transactions;
 
 import com.mael.payroll.*;
-import com.mael.payroll.paymentSchedules.CommissionedSchedule;
+import com.mael.payroll.paymentSchedules.BiweeklySchedule;
 import com.mael.payroll.paymentTypes.CommissionedPayment;
 import org.junit.Before;
 import org.junit.Test;
@@ -47,7 +47,7 @@ public class AddCommissionedEmployeeTest {
 
     @Test
     public void setsThePaymentScheduleAsCommissioned() {
-        assertTrue(employee.getPaymentSchedule() instanceof CommissionedSchedule);
+        assertTrue(employee.getPaymentSchedule() instanceof BiweeklySchedule);
     }
 
     @Test

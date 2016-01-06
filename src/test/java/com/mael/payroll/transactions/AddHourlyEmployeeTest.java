@@ -1,7 +1,7 @@
 package com.mael.payroll.transactions;
 
 import com.mael.payroll.*;
-import com.mael.payroll.paymentSchedules.HourlySchedule;
+import com.mael.payroll.paymentSchedules.WeeklySchedule;
 import com.mael.payroll.paymentTypes.HourlyPayment;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,7 +42,7 @@ public class AddHourlyEmployeeTest {
 
     @Test
     public void setsThePaymentScheduleAsHourly() {
-        assertTrue(employee.getPaymentSchedule() instanceof HourlySchedule);
+        assertTrue(employee.getPaymentSchedule() instanceof WeeklySchedule);
     }
 
     @Test

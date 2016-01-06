@@ -1,7 +1,7 @@
 package com.mael.payroll.transactions;
 
 import com.mael.payroll.PayrollDBFacade;
-import com.mael.payroll.paymentSchedules.CommissionedSchedule;
+import com.mael.payroll.paymentSchedules.BiweeklySchedule;
 import com.mael.payroll.paymentTypes.CommissionedPayment;
 
 public class AddCommissionedEmployee extends AddEmployee {
@@ -14,6 +14,6 @@ public class AddCommissionedEmployee extends AddEmployee {
         this.monthlyRate = monthlyRate;
         this.commission  = commission;
         setPaymentType(new CommissionedPayment(monthlyRate, commission));
-        setPaymentSchedule(new CommissionedSchedule());
+        setPaymentSchedule(new BiweeklySchedule());
     }
 }

@@ -1,6 +1,6 @@
 package com.mael.payroll;
 
-import com.mael.payroll.paymentSchedules.HourlySchedule;
+import com.mael.payroll.paymentSchedules.WeeklySchedule;
 import com.mael.payroll.paymentSchedules.PaymentSchedule;
 import com.mael.payroll.paymentTypes.HourlyPayment;
 import com.mael.payroll.paymentTypes.PaymentType;
@@ -45,7 +45,7 @@ public class EmployeeTest {
 
     @Test
     public void setsPaymentSchedule() {
-        PaymentSchedule schedule = new HourlySchedule();
+        PaymentSchedule schedule = new WeeklySchedule();
         employee.setPaymentSchedule(schedule);
         assertEquals(schedule, employee.getPaymentSchedule());
     }

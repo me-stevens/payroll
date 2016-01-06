@@ -1,7 +1,7 @@
 package com.mael.payroll.transactions;
 
 import com.mael.payroll.PayrollDBFacade;
-import com.mael.payroll.paymentSchedules.HourlySchedule;
+import com.mael.payroll.paymentSchedules.WeeklySchedule;
 import com.mael.payroll.paymentTypes.HourlyPayment;
 
 public class AddHourlyEmployee extends AddEmployee {
@@ -12,6 +12,6 @@ public class AddHourlyEmployee extends AddEmployee {
         super(payrollDB, employeeId, name, address);
         this.hourlyRate = hourlyRate;
         setPaymentType(new HourlyPayment(hourlyRate));
-        setPaymentSchedule(new HourlySchedule());
+        setPaymentSchedule(new WeeklySchedule());
     }
 }
