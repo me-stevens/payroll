@@ -25,6 +25,18 @@ public class EmployeeTest {
     }
 
     @Test
+    public void setsName() {
+        employee.setName("new name");
+        assertEquals("new name", employee.getName());
+    }
+
+    @Test
+    public void setAddress() {
+        employee.setAddress("new address");
+        assertEquals("new address", employee.getAddress());
+    }
+
+    @Test
     public void setsPaymentType() {
         PaymentType payment = new HourlyPayment(8.0);
         employee.setPaymentType(payment);
