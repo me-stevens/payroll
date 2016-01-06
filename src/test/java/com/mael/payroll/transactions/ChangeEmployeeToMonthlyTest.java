@@ -27,18 +27,18 @@ public class ChangeEmployeeToMonthlyTest {
     }
 
     @Test
-    public void changesEmployeeToMonthlySetsMonthlyPayment() {
+    public void setsMonthlyPayment() {
         assertTrue(employee.getPaymentType() instanceof MonthlyPayment);
     }
 
     @Test
-    public void changesEmployeeToMonthlySetsTheCorrectMonthlyRate() {
+    public void setsTheCorrectMonthlyRate() {
         MonthlyPayment monthlyPayment = (MonthlyPayment) employee.getPaymentType();
         assertEquals(2000.0, monthlyPayment.getMonthlyRate(), 0.001);
     }
 
     @Test
-    public void changesEmployeeToMonthlySetsMonthlySchedule() {
+    public void setsMonthlySchedule() {
         assertTrue(employee.getPaymentSchedule() instanceof MonthlySchedule);
     }
 }

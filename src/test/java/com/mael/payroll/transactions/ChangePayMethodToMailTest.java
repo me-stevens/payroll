@@ -11,7 +11,6 @@ import static org.junit.Assert.assertTrue;
 
 public class ChangePayMethodToMailTest {
 
-
     private Employee employee;
 
     @Before

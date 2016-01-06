@@ -27,18 +27,18 @@ public class ChangeEmployeeToCommissionedTest {
     }
 
     @Test
-    public void changesEmployeeToCommissionedSetsCommissionedPayment() {
+    public void setsCommissionedPayment() {
         assertTrue(employee.getPaymentType() instanceof CommissionedPayment);
     }
 
     @Test
-    public void changesEmployeeToCommissionedSetsTheRightMonthlyRate() {
+    public void setsTheRightMonthlyRate() {
         CommissionedPayment commissionedPayment = (CommissionedPayment) employee.getPaymentType();
         assertEquals(2000.0, commissionedPayment.getMonthlyRate(), 0.001);
     }
 
     @Test
-    public void changesEmployeeToCommissionedSetsTheRightCommission() {
+    public void setsTheRightCommission() {
         CommissionedPayment commissionedPayment = (CommissionedPayment) employee.getPaymentType();
         assertEquals(8.0, commissionedPayment.getCommission(), 0.001);
     }
