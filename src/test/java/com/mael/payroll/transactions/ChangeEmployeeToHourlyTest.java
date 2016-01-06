@@ -32,13 +32,13 @@ public class ChangeEmployeeToHourlyTest {
     }
 
     @Test
-    public void changesEmployeeToHourlySetsWeeklySchedule() {
-        assertTrue(employee.getPaymentSchedule() instanceof WeeklySchedule);
-    }
-
-    @Test
     public void changesEmployeeToHourlySetsTheCorrectHourlyRate() {
         HourlyPayment hourlyPayment = (HourlyPayment) employee.getPaymentType();
         assertEquals(2000.0, hourlyPayment.getHourlyRate(), 0.001);
+    }
+
+    @Test
+    public void changesEmployeeToHourlySetsWeeklySchedule() {
+        assertTrue(employee.getPaymentSchedule() instanceof WeeklySchedule);
     }
 }
