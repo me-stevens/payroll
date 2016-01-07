@@ -10,6 +10,7 @@ public class ChangePayMethodToMail extends ChangeEmployee {
         super(payrollDB, employeeId);
     }
 
+    @Override
     public void change(Employee employee) {
         employee.setPaymentMethod(new MailMethod(employee.getAddress()));
     }

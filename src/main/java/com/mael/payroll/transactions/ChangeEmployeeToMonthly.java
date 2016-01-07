@@ -14,6 +14,7 @@ public class ChangeEmployeeToMonthly extends ChangeEmployee {
         this.monthlyRate = monthlyRate;
     }
 
+    @Override
     public void change(Employee employee) {
         employee.setPaymentType(new MonthlyPayment(monthlyRate));
         employee.setPaymentSchedule(new MonthlySchedule());

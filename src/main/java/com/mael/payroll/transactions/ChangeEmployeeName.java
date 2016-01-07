@@ -12,6 +12,7 @@ public class ChangeEmployeeName extends ChangeEmployee {
         this.name = name;
     }
 
+    @Override
     public void change(Employee employee) {
         employee.setName(name);
     }

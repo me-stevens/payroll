@@ -16,6 +16,7 @@ public class ChangeEmployeeToCommissioned extends ChangeEmployee {
         this.commission  = commission;
     }
 
+    @Override
     public void change(Employee employee) {
         employee.setPaymentType(new CommissionedPayment(monthlyRate, commission));
         employee.setPaymentSchedule(new BiweeklySchedule());

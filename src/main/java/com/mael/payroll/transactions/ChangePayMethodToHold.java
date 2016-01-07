@@ -10,6 +10,7 @@ public class ChangePayMethodToHold extends ChangeEmployee {
         super(payrollDB, employeeId);
     }
 
+    @Override
     public void change(Employee employee) {
         employee.setPaymentMethod(new HoldMethod(employee.getAddress()));
     }
