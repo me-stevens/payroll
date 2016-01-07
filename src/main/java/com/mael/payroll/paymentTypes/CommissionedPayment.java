@@ -27,4 +27,9 @@ public class CommissionedPayment implements PaymentType {
     public SalesCard getSalesCard() {
         return salesCard;
     }
+
+    @Override
+    public double calculatePay() {
+        return 0;
+    }
 }

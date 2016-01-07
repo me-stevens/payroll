@@ -10,4 +10,9 @@ public class MonthlyPayment implements PaymentType {
     public double getMonthlyRate() {
         return monthlyRate;
     }
+
+    @Override
+    public double calculatePay() {
+        return getMonthlyRate();
+    }
 }
