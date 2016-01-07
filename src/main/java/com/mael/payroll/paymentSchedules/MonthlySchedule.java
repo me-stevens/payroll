@@ -5,6 +5,7 @@ import java.time.Month;
 
 public class MonthlySchedule implements PaymentSchedule {
 
+    @Override
     public boolean isPayDay(LocalDate date) {
         return isLastDayOfMonth(date);
     }
