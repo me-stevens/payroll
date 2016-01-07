@@ -47,4 +47,18 @@ public class PayDayTransactionTest {
 
         assertEquals(null, payDayTransaction.getPayChecks().get(employeeId));
     }
+
+    @Test
+    public void paysHourlyEmployeeWithNoTimeCards() {
+        AddEmployee addHourlyEmployee = new AddHourlyEmployee(payrollDB, employeeId, "Squiddo", "FishBowl", 1000.0);
+        addHourlyEmployee.execute();
+
+        LocalDate friday = of(2016, JANUARY, 29);
+        PayDayTransaction payDayTransaction = new PayDayTransaction(payrollDB, friday);
+        payDayTransaction.execute();
+
+        Paycheck paycheck = payDayTransaction.getPayChecks().get(employeeId);
+        assertEquals(friday, paycheck.getDate());
+        assertEquals(0.0, paycheck.getNetPay(), 0.001);
+    }
 }
