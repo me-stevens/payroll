@@ -59,7 +59,7 @@ public class EmployeeTest {
     }
 
     @Test
-    public void getsPaid() {
+    public void aMonthlyEmployeeGetsPaid() {
         employee.setPaymentType(new MonthlyPayment(1000.0));
         employee.setPaymentSchedule(new MonthlySchedule());
         employee.setPaymentMethod(new HoldMethod(employee.getAddress()));
