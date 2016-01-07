@@ -4,6 +4,8 @@ import com.mael.payroll.paymentMethods.PaymentMethod;
 import com.mael.payroll.paymentSchedules.PaymentSchedule;
 import com.mael.payroll.paymentTypes.PaymentType;
 
+import java.time.LocalDate;
+
 public class Employee {
 
     private String name;
@@ -60,5 +62,9 @@ public class Employee {
     public void getPaid(Paycheck paycheck) {
         double netPay = getPaymentType().calculatePay();
         paycheck.setNetPay(netPay);
+    }
+
+    public boolean isPayDay(LocalDate date) {
+        return getPaymentSchedule().isPayDay(date);
     }
 }

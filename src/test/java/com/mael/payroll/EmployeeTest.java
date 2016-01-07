@@ -1,19 +1,14 @@
 package com.mael.payroll;
 
-import com.mael.payroll.paymentMethods.HoldMethod;
-import com.mael.payroll.paymentMethods.PaymentMethod;
-import com.mael.payroll.paymentSchedules.MonthlySchedule;
-import com.mael.payroll.paymentSchedules.PaymentSchedule;
-import com.mael.payroll.paymentSchedules.WeeklySchedule;
-import com.mael.payroll.paymentTypes.HourlyPayment;
-import com.mael.payroll.paymentTypes.MonthlyPayment;
-import com.mael.payroll.paymentTypes.PaymentType;
+import com.mael.payroll.paymentMethods.*;
+import com.mael.payroll.paymentSchedules.*;
+import com.mael.payroll.paymentTypes.*;
 import org.junit.Before;
 import org.junit.Test;
 
 import static java.time.LocalDate.of;
 import static java.time.Month.JANUARY;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class EmployeeTest {
 
@@ -73,4 +68,13 @@ public class EmployeeTest {
         employee.getPaid(paycheck);
         assertEquals(1000.0, paycheck.getNetPay(), 0.001);
     }
+
+    @Test
+    public void checksPayDayForMonthlyPayDay() {
+        employee.setPaymentSchedule(new MonthlySchedule());
+        assertTrue(employee.isPayDay(of(2016, JANUARY, 31)));
+        assertFalse(employee.isPayDay(of(2016, JANUARY, 30)));
+    }
+
+
 }
