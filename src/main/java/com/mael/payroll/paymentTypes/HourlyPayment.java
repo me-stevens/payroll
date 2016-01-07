@@ -24,6 +24,9 @@ public class HourlyPayment implements PaymentType {
 
     @Override
     public double calculatePay() {
+        if (timeCard != null) {
+            return timeCard.getHours() * getHourlyRate();
+        }
         return 0;
     }
 }

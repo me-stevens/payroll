@@ -26,14 +26,8 @@ public class PayDayTransactionTest {
     public void paysMonthlyEmployeeAtTheEndOfTheMonth() {
         AddEmployee addMonthlyEmployee = new AddMonthlyEmployee(payrollDB, employeeId, "Squiddo", "FishBowl", 1000.0);
         addMonthlyEmployee.execute();
-
         LocalDate payDay = of(2016, JANUARY, 31);
-        PayDayTransaction payDayTransaction = new PayDayTransaction(payrollDB, payDay);
-        payDayTransaction.execute();
-
-        Paycheck paycheck = payDayTransaction.getPayChecks().get(employeeId);
-        assertEquals(payDay, paycheck.getDate());
-        assertEquals(1000.0, paycheck.getNetPay(), 0.001);
+        assertPayDay(payDay, 1000.0);
     }
 
     @Test
@@ -42,6 +36,7 @@ public class PayDayTransactionTest {
         addMonthlyEmployee.execute();
 
         LocalDate payDay = of(2016, JANUARY, 30);
+
         PayDayTransaction payDayTransaction = new PayDayTransaction(payrollDB, payDay);
         payDayTransaction.execute();
 
@@ -49,16 +44,32 @@ public class PayDayTransactionTest {
     }
 
     @Test
-    public void paysHourlyEmployeeWithNoTimeCards() {
+    public void paysZeroToHourlyEmployeeWithNoTimeCards() {
         AddEmployee addHourlyEmployee = new AddHourlyEmployee(payrollDB, employeeId, "Squiddo", "FishBowl", 1000.0);
         addHourlyEmployee.execute();
-
         LocalDate friday = of(2016, JANUARY, 29);
-        PayDayTransaction payDayTransaction = new PayDayTransaction(payrollDB, friday);
+        assertPayDay(friday, 0.0);
+    }
+
+    @Test
+    public void paysHoursBuRateToHourlyEmployeeWithOneTimeCard() {
+        AddEmployee addHourlyEmployee = new AddHourlyEmployee(payrollDB, employeeId, "Squiddo", "FishBowl", 1000.0);
+        addHourlyEmployee.execute();
+        LocalDate friday = of(2016, JANUARY, 29);
+
+        AddTimeCard addTimeCard = new AddTimeCard(payrollDB, employeeId, friday, 8.0);
+        addTimeCard.execute();
+
+        assertPayDay(friday, 8.0 * 1000.0);
+    }
+
+    private void assertPayDay(LocalDate payDay, double payAmount) {
+        PayDayTransaction payDayTransaction = new PayDayTransaction(payrollDB, payDay);
         payDayTransaction.execute();
 
         Paycheck paycheck = payDayTransaction.getPayChecks().get(employeeId);
-        assertEquals(friday, paycheck.getDate());
-        assertEquals(0.0, paycheck.getNetPay(), 0.001);
+
+        assertEquals(payDay,    paycheck.getDate());
+        assertEquals(payAmount, paycheck.getNetPay(), 0.001);
     }
 }
