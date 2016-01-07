@@ -21,13 +21,13 @@ public class PayDayTransaction {
     }
 
     public void execute() {
-        for (Map.Entry<Integer, Employee> entry : payrollDB.getAllEmployees().entrySet()) {
+        for (Map.Entry<Integer, Employee> employeeRecord : payrollDB.getAllEmployees().entrySet()) {
 
-            Employee employee = entry.getValue();
+            Employee employee = employeeRecord.getValue();
 
             if (employee.isPayDay(payDay)) {
                 Paycheck payCheck = new Paycheck(payDay);
-                payChecks.put(entry.getKey(), payCheck);
+                payChecks.put(employeeRecord.getKey(), payCheck);
                 employee.getPaid(payCheck);
             }
         }

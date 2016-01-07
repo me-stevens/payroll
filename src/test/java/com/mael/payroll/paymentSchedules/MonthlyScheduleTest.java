@@ -3,7 +3,6 @@ package com.mael.payroll.paymentSchedules;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.time.DateTimeException;
 import java.time.LocalDate;
 
 import static java.time.Month.JANUARY;
@@ -29,11 +28,5 @@ public class MonthlyScheduleTest {
     public void returnsFalseIfNotLastDayOfMonth() {
         LocalDate notLastDayOfMonth = LocalDate.of(2016, JANUARY, 30);
         assertFalse(monthlySchedule.isPayDay(notLastDayOfMonth));
-    }
-
-    @Test (expected = DateTimeException.class)
-    public void throwsExceptionIfInvalidDate() {
-        LocalDate invalidDate = LocalDate.of(2016, JANUARY, -1);
-        monthlySchedule.isPayDay(invalidDate);
     }
 }

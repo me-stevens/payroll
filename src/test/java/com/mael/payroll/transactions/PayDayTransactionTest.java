@@ -14,35 +14,37 @@ import static org.junit.Assert.assertEquals;
 public class PayDayTransactionTest {
 
     private PayrollDBFacade payrollDB;
+    private int employeeId;
 
     @Before
     public void setUp() {
-        payrollDB = new PayrollDBFacade();
+        payrollDB  = new PayrollDBFacade();
+        employeeId = 1;
     }
 
     @Test
     public void paysMonthlyEmployeeAtTheEndOfTheMonth() {
-        AddEmployee addMonthlyEmployee = new AddMonthlyEmployee(payrollDB, 1, "Squiddo", "FishBowl", 1000.0);
+        AddEmployee addMonthlyEmployee = new AddMonthlyEmployee(payrollDB, employeeId, "Squiddo", "FishBowl", 1000.0);
         addMonthlyEmployee.execute();
 
         LocalDate payDay = of(2016, JANUARY, 31);
         PayDayTransaction payDayTransaction = new PayDayTransaction(payrollDB, payDay);
         payDayTransaction.execute();
 
-        Paycheck paycheck = payDayTransaction.getPayChecks().get(1);
+        Paycheck paycheck = payDayTransaction.getPayChecks().get(employeeId);
         assertEquals(payDay, paycheck.getDate());
         assertEquals(1000.0, paycheck.getNetPay(), 0.001);
     }
 
     @Test
     public void doesntPayMonthlyEmployeeIfNotAtEndOfMonth() {
-        AddEmployee addMonthlyEmployee = new AddMonthlyEmployee(payrollDB, 1, "Squiddo", "FishBowl", 1000.0);
+        AddEmployee addMonthlyEmployee = new AddMonthlyEmployee(payrollDB, employeeId, "Squiddo", "FishBowl", 1000.0);
         addMonthlyEmployee.execute();
 
         LocalDate payDay = of(2016, JANUARY, 30);
         PayDayTransaction payDayTransaction = new PayDayTransaction(payrollDB, payDay);
         payDayTransaction.execute();
 
-        assertEquals(null, payDayTransaction.getPayChecks().get(1));
+        assertEquals(null, payDayTransaction.getPayChecks().get(employeeId));
     }
 }
