@@ -7,6 +7,9 @@ import com.mael.payroll.paymentTypes.HourlyPayment;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.time.LocalDate;
+import java.time.Month;
+
 import static junit.framework.TestCase.assertEquals;
 
 public class AddTimeCardTest {
@@ -26,11 +29,12 @@ public class AddTimeCardTest {
         addHourlyEmployee.execute();
         employee = payrollDB.getEmployee(1);
 
-        addTimeCard = new AddTimeCard(payrollDB, 1, 10001010, 8.0);
+        LocalDate friday = LocalDate.of(2016, Month.JANUARY, 29);
+        addTimeCard = new AddTimeCard(payrollDB, 1, friday, 8.0);
         addTimeCard.execute();
 
         TimeCard timeCard = ((HourlyPayment)employee.getPaymentType()).getTimeCard();
-        assertEquals(10001010, timeCard.getDate());
+        assertEquals(friday, timeCard.getDate());
         assertEquals(8.0, timeCard.getHours(), 0.001);
     }
 
@@ -40,7 +44,8 @@ public class AddTimeCardTest {
         addMonthlyEmployee.execute();
         employee = payrollDB.getEmployee(1);
 
-        addTimeCard = new AddTimeCard(payrollDB, 1, 10001010, 8.0);
+        LocalDate friday = LocalDate.of(2016, Month.JANUARY, 29);
+        addTimeCard = new AddTimeCard(payrollDB, 1, friday, 8.0);
         addTimeCard.execute();
     }
 }

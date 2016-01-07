@@ -1,15 +1,17 @@
 package com.mael.payroll.cards;
 
+import java.time.LocalDate;
+
 public class TimeCard {
-    private int date;
+    private LocalDate date;
     private double hours;
 
-    public TimeCard(int date, double hours) {
+    public TimeCard(LocalDate date, double hours) {
         this.date  = date;
         this.hours = hours;
     }
 
-    public int getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
