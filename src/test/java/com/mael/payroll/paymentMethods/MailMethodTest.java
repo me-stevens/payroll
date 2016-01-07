@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 public class MailMethodTest {
 
     @Test
-    public void createsAMailMethod() {
+    public void hasAnAddress() {
         MailMethod mailMethod = new MailMethod("address");
         assertEquals("address", mailMethod.getAddress());
     }
