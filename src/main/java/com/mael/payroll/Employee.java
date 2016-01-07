@@ -56,4 +56,9 @@ public class Employee {
     public PaymentMethod getPaymentMethod() {
         return paymentMethod;
     }
+
+    public void getPaid(Paycheck paycheck) {
+        double netPay = getPaymentType().calculatePay();
+        paycheck.setNetPay(netPay);
+    }
 }
