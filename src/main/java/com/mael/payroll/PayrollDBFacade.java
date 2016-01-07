@@ -1,10 +1,11 @@
 package com.mael.payroll;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class PayrollDBFacade {
 
-    private HashMap<Integer, Employee> listOfEmployees;
+    private Map<Integer, Employee> listOfEmployees;
 
     public PayrollDBFacade() {
         listOfEmployees = new HashMap<>();
@@ -23,6 +24,10 @@ public class PayrollDBFacade {
 
     public void deleteEmployee(int employeeId) {
         listOfEmployees.remove(employeeId);
+    }
+
+    public Map<Integer, Employee> getAllEmployees() {
+        return listOfEmployees;
     }
 
     public class EmployeeNotInDBException extends RuntimeException {
