@@ -19,13 +19,13 @@ public class MonthlyScheduleTest {
     }
 
     @Test
-    public void returnsTrueIfLastDayOfMonth() {
+    public void itIsPayDayIfLastDayOfMonth() {
         LocalDate lastDayOfMonth = LocalDate.of(2016, JANUARY, 31);
         assertTrue(monthlySchedule.isPayDay(lastDayOfMonth));
     }
 
     @Test
-    public void returnsFalseIfNotLastDayOfMonth() {
+    public void isNotPayDayIfNotLastDayOfMonth() {
         LocalDate notLastDayOfMonth = LocalDate.of(2016, JANUARY, 30);
         assertFalse(monthlySchedule.isPayDay(notLastDayOfMonth));
     }

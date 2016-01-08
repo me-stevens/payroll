@@ -12,14 +12,14 @@ import static org.junit.Assert.assertTrue;
 public class WeeklyScheduleTest {
 
     @Test
-    public void returnsTrueIfItsFriday() {
+    public void itIsPayDayIfItsFriday() {
         WeeklySchedule weeklySchedule = new WeeklySchedule();
         LocalDate friday = of(2016, JANUARY, 29);
         assertTrue(weeklySchedule.isPayDay(friday));
     }
 
     @Test
-    public void returnsFalseIfItsNotFriday() {
+    public void isNotPayDayIfItsNotFriday() {
         WeeklySchedule weeklySchedule = new WeeklySchedule();
         LocalDate notAfriday = of(2016, JANUARY, 30);
         assertFalse(weeklySchedule.isPayDay(notAfriday));
