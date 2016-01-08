@@ -2,6 +2,8 @@ package com.mael.payroll.paymentTypes;
 
 import com.mael.payroll.cards.SalesCard;
 
+import java.time.LocalDate;
+
 public class CommissionedPayment implements PaymentType {
     private double monthlyRate;
     private double commission;
@@ -29,7 +31,7 @@ public class CommissionedPayment implements PaymentType {
     }
 
     @Override
-    public double calculatePay() {
+    public double calculatePay(LocalDate payDay) {
         return 0;
     }
 }

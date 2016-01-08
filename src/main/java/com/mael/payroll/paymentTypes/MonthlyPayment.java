@@ -1,5 +1,7 @@
 package com.mael.payroll.paymentTypes;
 
+import java.time.LocalDate;
+
 public class MonthlyPayment implements PaymentType {
     private double monthlyRate;
 
@@ -12,7 +14,7 @@ public class MonthlyPayment implements PaymentType {
     }
 
     @Override
-    public double calculatePay() {
+    public double calculatePay(LocalDate payDay) {
         return getMonthlyRate();
     }
 }

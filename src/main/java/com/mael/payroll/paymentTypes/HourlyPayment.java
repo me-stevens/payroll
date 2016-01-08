@@ -33,7 +33,7 @@ public class HourlyPayment implements PaymentType {
     }
 
     @Override
-    public double calculatePay() {
+    public double calculatePay(LocalDate payDay) {
         int pay = 0;
         if (timeCards.size() > 0) {
             for(TimeCard timeCard : timeCards) {

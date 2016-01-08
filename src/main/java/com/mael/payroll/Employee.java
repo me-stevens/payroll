@@ -60,7 +60,7 @@ public class Employee {
     }
 
     public void getPaid(Paycheck paycheck) {
-        double netPay = getPaymentType().calculatePay();
+        double netPay = getPaymentType().calculatePay(paycheck.getDate());
         paycheck.setNetPay(netPay);
     }
 

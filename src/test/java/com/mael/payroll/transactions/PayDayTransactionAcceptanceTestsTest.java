@@ -11,7 +11,7 @@ import static java.time.LocalDate.of;
 import static java.time.Month.JANUARY;
 import static org.junit.Assert.assertEquals;
 
-public class PayDayTransactionTest {
+public class PayDayTransactionAcceptanceTestsTest {
 
     private PayrollDBFacade payrollDB;
     private int employeeId;
@@ -26,8 +26,8 @@ public class PayDayTransactionTest {
     public void paysMonthlyEmployeeAtTheEndOfTheMonth() {
         AddEmployee addMonthlyEmployee = new AddMonthlyEmployee(payrollDB, employeeId, "Squiddo", "FishBowl", 1000.0);
         addMonthlyEmployee.execute();
-        LocalDate payDay = of(2016, JANUARY, 31);
-        assertPayDay(payDay, 1000.0);
+        LocalDate lastDayOfMonth = of(2016, JANUARY, 31);
+        assertWasPaid(lastDayOfMonth, 1000.0);
     }
 
     @Test
@@ -35,9 +35,9 @@ public class PayDayTransactionTest {
         AddEmployee addMonthlyEmployee = new AddMonthlyEmployee(payrollDB, employeeId, "Squiddo", "FishBowl", 1000.0);
         addMonthlyEmployee.execute();
 
-        LocalDate payDay = of(2016, JANUARY, 30);
+        LocalDate notTheLastDayOfMonth = of(2016, JANUARY, 30);
 
-        PayDayTransaction payDayTransaction = new PayDayTransaction(payrollDB, payDay);
+        PayDayTransaction payDayTransaction = new PayDayTransaction(payrollDB, notTheLastDayOfMonth);
         payDayTransaction.execute();
 
         assertEquals(null, payDayTransaction.getPayChecks().get(employeeId));
@@ -48,7 +48,7 @@ public class PayDayTransactionTest {
         AddEmployee addHourlyEmployee = new AddHourlyEmployee(payrollDB, employeeId, "Squiddo", "FishBowl", 1000.0);
         addHourlyEmployee.execute();
         LocalDate friday = of(2016, JANUARY, 29);
-        assertPayDay(friday, 0.0);
+        assertWasPaid(friday, 0.0);
     }
 
     @Test
@@ -61,7 +61,7 @@ public class PayDayTransactionTest {
         AddTimeCard addTimeCard = new AddTimeCard(payrollDB, employeeId, friday, 8.0);
         addTimeCard.execute();
 
-        assertPayDay(friday, 8.0 * 1000.0);
+        assertWasPaid(friday, 8.0 * 1000.0);
     }
 
     @Test
@@ -69,18 +69,35 @@ public class PayDayTransactionTest {
         AddEmployee addHourlyEmployee = new AddHourlyEmployee(payrollDB, employeeId, "Squiddo", "FishBowl", 1000.0);
         addHourlyEmployee.execute();
 
-        LocalDate lastFriday = of(2016, JANUARY, 22);
-        AddTimeCard addTimeCard = new AddTimeCard(payrollDB, employeeId, lastFriday, 8.0);
+        LocalDate monday = of(2016, JANUARY, 25);
+        AddTimeCard addTimeCard = new AddTimeCard(payrollDB, employeeId, monday, 8.0);
         addTimeCard.execute();
 
-        LocalDate thisFriday = of(2016, JANUARY, 29);
-        addTimeCard = new AddTimeCard(payrollDB, employeeId, thisFriday, 8.0);
+        LocalDate tuesday = of(2016, JANUARY, 26);
+        addTimeCard = new AddTimeCard(payrollDB, employeeId, tuesday, 8.0);
         addTimeCard.execute();
 
-        assertPayDay(thisFriday, 8.0 * (1000.0 + 1000.0));
+        LocalDate friday = of(2016, JANUARY, 29);
+        assertWasPaid(friday, 8.0 * (1000.0 + 1000.0));
     }
 
-    private void assertPayDay(LocalDate payDay, double payAmount) {
+    @Test
+    public void doesntPayHourlyEmployeeIfItIsNotAFriday() {
+        AddEmployee addHourlyEmployee = new AddHourlyEmployee(payrollDB, employeeId, "Squiddo", "FishBowl", 1000.0);
+        addHourlyEmployee.execute();
+
+        LocalDate monday = of(2016, JANUARY, 25);
+        AddTimeCard addTimeCard = new AddTimeCard(payrollDB, employeeId, monday, 8.0);
+        addTimeCard.execute();
+
+        LocalDate saturday = of(2016, JANUARY, 30);
+        PayDayTransaction payDayTransaction = new PayDayTransaction(payrollDB, saturday);
+        payDayTransaction.execute();
+
+        assertEquals(null, payDayTransaction.getPayChecks().get(employeeId));
+    }
+
+    private void assertWasPaid(LocalDate payDay, double payAmount) {
         PayDayTransaction payDayTransaction = new PayDayTransaction(payrollDB, payDay);
         payDayTransaction.execute();
 
