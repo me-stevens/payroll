@@ -9,10 +9,12 @@ import java.util.List;
 public class HourlyPayment implements PaymentType {
     private double hourlyRate;
     private List<TimeCard> timeCards;
+    private final double MAX_HOURS_PER_DAY;
 
     public HourlyPayment(double hourlyRate) {
-        this.hourlyRate = hourlyRate;
-        this.timeCards  = new ArrayList<>();
+        this.hourlyRate   = hourlyRate;
+        this.timeCards    = new ArrayList<>();
+        MAX_HOURS_PER_DAY = 8.0;
     }
 
     public double getHourlyRate() {
@@ -34,15 +36,27 @@ public class HourlyPayment implements PaymentType {
 
     @Override
     public double calculatePay(LocalDate payDay) {
-        int pay = 0;
-        if (timeCards.size() > 0) {
-            for(TimeCard timeCard : timeCards) {
-                pay += timeCard.getHours() * getHourlyRate();
+        double pay = 0.0;
+        for(TimeCard timeCard : timeCards) {
+            if (inCurrenWeek(payDay, timeCard)) {
+                pay += calculatePayFor(timeCard);
             }
         }
         return pay;
     }
 
+    private double calculatePayFor(TimeCard timeCard) {
+        double extraHours  = Math.max(timeCard.getHours() - MAX_HOURS_PER_DAY, 0.0);
+        double normalHours = timeCard.getHours() - extraHours;
+        return (normalHours + extraHours * 1.5) * getHourlyRate();
+    }
+
+    private boolean inCurrenWeek(LocalDate payDay, TimeCard timeCard) {
+        return timeCard.getDate().isAfter(payDay.minusDays(5));
+    }
+
     public class TimeCardNotFoundException extends RuntimeException {
     }
 }
+
+

@@ -40,13 +40,27 @@ public class HourlyPaymentTest {
         LocalDate tuesday = of(2016, JANUARY, 26);
         hourlyPayment.addTimeCard(new TimeCard(tuesday, 8.0));
 
-        assertEquals(8.0 * (1000.0 + 1000.0), hourlyPayment.calculatePay(friday), 0.001);
+        assertEquals(8.0 * 1000.0 + 8.0 * 1000.0, hourlyPayment.calculatePay(friday), 0.001);
     }
 
     @Test
-    public void thePayIsCalculatedWithTheTimeCardsOfThePeriodOnly() {
-        LocalDate lastFriday = of(2016, JANUARY, 22);
-        hourlyPayment.addTimeCard(new TimeCard(lastFriday, 8.0));
+    public void extraHoursArePaidMoreThanNormalHours() {
+        LocalDate monday = of(2016, JANUARY, 25);
+        hourlyPayment.addTimeCard(new TimeCard(monday, 10.0));
+        assertEquals((8.0 + 2.0 * 1.5) * 1000.0, hourlyPayment.calculatePay(friday), 0.001);
+    }
+
+    @Test
+    public void paysLessThanEightHours() {
+        LocalDate monday = of(2016, JANUARY, 25);
+        hourlyPayment.addTimeCard(new TimeCard(monday, 5.0));
+        assertEquals(5.0 * 1000.0, hourlyPayment.calculatePay(friday), 0.001);
+    }
+
+    @Test
+    public void thePayIsCalculatedWithTheTimeCardsOfCurrentWeekOnly() {
+        LocalDate lastWeek = of(2016, JANUARY, 22);
+        hourlyPayment.addTimeCard(new TimeCard(lastWeek, 8.0));
 
         LocalDate monday = of(2016, JANUARY, 25);
         hourlyPayment.addTimeCard(new TimeCard(monday, 8.0));
