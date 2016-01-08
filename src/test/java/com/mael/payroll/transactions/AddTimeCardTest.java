@@ -33,7 +33,7 @@ public class AddTimeCardTest {
         addTimeCard = new AddTimeCard(payrollDB, 1, friday, 8.0);
         addTimeCard.execute();
 
-        TimeCard timeCard = ((HourlyPayment)employee.getPaymentType()).getTimeCard();
+        TimeCard timeCard = ((HourlyPayment)employee.getPaymentType()).getTimeCard(friday);
         assertEquals(friday, timeCard.getDate());
         assertEquals(8.0, timeCard.getHours(), 0.001);
     }

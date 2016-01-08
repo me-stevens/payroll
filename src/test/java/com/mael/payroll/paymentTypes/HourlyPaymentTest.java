@@ -27,7 +27,24 @@ public class HourlyPaymentTest {
     @Test
     public void thePayIsHoursByRateIfOneTimeCard() {
         LocalDate friday = of(2016, Month.JANUARY, 29);
-        hourlyPayment.setTimeCard(new TimeCard(friday, 8.0));
+        hourlyPayment.addTimeCard(new TimeCard(friday, 8.0));
         assertEquals(8.0 * 1000.0, hourlyPayment.calculatePay(), 0.001);
+    }
+
+    @Test
+    public void thePayIsTheSumOfTotalHoursByRateIfTwoTimeCards() {
+        LocalDate lastFriday = of(2016, Month.JANUARY, 22);
+        hourlyPayment.addTimeCard(new TimeCard(lastFriday, 8.0));
+
+        LocalDate thisFriday = of(2016, Month.JANUARY, 29);
+        hourlyPayment.addTimeCard(new TimeCard(thisFriday, 8.0));
+
+        assertEquals(8.0 * (1000.0 + 1000.0), hourlyPayment.calculatePay(), 0.001);
+    }
+
+    @Test (expected = HourlyPayment.TimeCardNotFoundException.class)
+    public void throwsExceptionIfNoTimeCardIsFoundForADate() {
+        LocalDate friday = of(2016, Month.JANUARY, 29);
+        hourlyPayment.getTimeCard(friday);
     }
 }

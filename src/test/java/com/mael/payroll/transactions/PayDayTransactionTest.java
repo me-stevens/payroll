@@ -52,15 +52,32 @@ public class PayDayTransactionTest {
     }
 
     @Test
-    public void paysHoursBuRateToHourlyEmployeeWithOneTimeCard() {
+    public void paysHoursByRateToHourlyEmployeeWithOneTimeCard() {
         AddEmployee addHourlyEmployee = new AddHourlyEmployee(payrollDB, employeeId, "Squiddo", "FishBowl", 1000.0);
         addHourlyEmployee.execute();
+
         LocalDate friday = of(2016, JANUARY, 29);
 
         AddTimeCard addTimeCard = new AddTimeCard(payrollDB, employeeId, friday, 8.0);
         addTimeCard.execute();
 
         assertPayDay(friday, 8.0 * 1000.0);
+    }
+
+    @Test
+    public void paysHoursByRateToHourlyEmployeeWithTwoTimeCards() {
+        AddEmployee addHourlyEmployee = new AddHourlyEmployee(payrollDB, employeeId, "Squiddo", "FishBowl", 1000.0);
+        addHourlyEmployee.execute();
+
+        LocalDate lastFriday = of(2016, JANUARY, 22);
+        AddTimeCard addTimeCard = new AddTimeCard(payrollDB, employeeId, lastFriday, 8.0);
+        addTimeCard.execute();
+
+        LocalDate thisFriday = of(2016, JANUARY, 29);
+        addTimeCard = new AddTimeCard(payrollDB, employeeId, thisFriday, 8.0);
+        addTimeCard.execute();
+
+        assertPayDay(thisFriday, 8.0 * (1000.0 + 1000.0));
     }
 
     private void assertPayDay(LocalDate payDay, double payAmount) {
