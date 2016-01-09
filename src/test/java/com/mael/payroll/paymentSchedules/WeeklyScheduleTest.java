@@ -1,5 +1,6 @@
 package com.mael.payroll.paymentSchedules;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDate;
@@ -11,16 +12,21 @@ import static org.junit.Assert.assertTrue;
 
 public class WeeklyScheduleTest {
 
+    private PaymentSchedule weeklySchedule;
+
+    @Before
+    public void setUp() throws Exception {
+        weeklySchedule = new WeeklySchedule();
+    }
+
     @Test
     public void itIsPayDayIfItsFriday() {
-        WeeklySchedule weeklySchedule = new WeeklySchedule();
         LocalDate friday = of(2016, JANUARY, 29);
         assertTrue(weeklySchedule.isPayDay(friday));
     }
 
     @Test
     public void isNotPayDayIfItsNotFriday() {
-        WeeklySchedule weeklySchedule = new WeeklySchedule();
         LocalDate notAfriday = of(2016, JANUARY, 30);
         assertFalse(weeklySchedule.isPayDay(notAfriday));
     }

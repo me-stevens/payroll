@@ -1,7 +1,8 @@
 package com.mael.payroll.paymentSchedules;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
+
+import static java.time.DayOfWeek.FRIDAY;
 
 public class WeeklySchedule implements PaymentSchedule {
 
@@ -11,6 +12,6 @@ public class WeeklySchedule implements PaymentSchedule {
     }
 
     private boolean isFriday(LocalDate date) {
-        return date.getDayOfWeek() == DayOfWeek.FRIDAY;
+        return date.getDayOfWeek() == FRIDAY;
     }
 }

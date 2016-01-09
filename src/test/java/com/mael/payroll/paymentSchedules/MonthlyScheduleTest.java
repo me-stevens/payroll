@@ -11,7 +11,7 @@ import static org.junit.Assert.assertTrue;
 
 public class MonthlyScheduleTest {
 
-    private MonthlySchedule monthlySchedule;
+    private PaymentSchedule monthlySchedule;
 
     @Before
     public void setUp() {
