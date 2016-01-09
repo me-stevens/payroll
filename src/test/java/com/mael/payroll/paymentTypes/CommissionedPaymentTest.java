@@ -1,6 +1,7 @@
 package com.mael.payroll.paymentTypes;
 
 import com.mael.payroll.cards.SalesCard;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,12 +15,16 @@ public class CommissionedPaymentTest {
 	private CommissionedPayment commissionedPayment;
 	private LocalDate fridayAndBiweekly;
 	private double amount;
+	private double commission;
+	private double monthlyRate;
 
 	@Before
 	public void setUp() {
-		commissionedPayment = new CommissionedPayment(1000.0, 2.0);
+		monthlyRate         = 1000.0;
+		commission          = 2.0;
+		commissionedPayment = new CommissionedPayment(monthlyRate, commission);
 		fridayAndBiweekly   = of(2016, JANUARY, 29);
-		amount              = 100.0;
+		amount              = 200.0;
 	}
 
 	@Test
@@ -30,7 +35,7 @@ public class CommissionedPaymentTest {
 	@Test
 	public void thePayIsRatePlusAmountByCommissionIfOneSalesCard() {
 		commissionedPayment.addSalesCard(new SalesCard(fridayAndBiweekly, amount));
-		assertPay(1000.0 + (amount * 2.0 / 100.0));
+		assertPay(monthlyRate + (amount * commission / 100.0));
 	}
 
 	@Test
@@ -41,7 +46,8 @@ public class CommissionedPaymentTest {
 		LocalDate tuesday = of(2016, JANUARY, 26);
 		commissionedPayment.addSalesCard(new SalesCard(tuesday, amount));
 
-		assertPay(1000.0 + (amount * 2.0 / 100.0) + 1000.0 + (amount * 2.0 / 100.0));
+		assertPay(monthlyRate + (amount * commission / 100.0) +
+				  monthlyRate + (amount * commission / 100.0));
 	}
 
 	@Test
@@ -52,7 +58,7 @@ public class CommissionedPaymentTest {
 		LocalDate mondayCurrentWeek = of(2016, JANUARY, 25);
 		commissionedPayment.addSalesCard(new SalesCard(mondayCurrentWeek, amount));
 
-		assertPay(1000.0 + (amount * 2.0 / 100.0));
+		assertPay(monthlyRate + (amount * commission / 100.0));
 	}
 
 	@Test (expected = CommissionedPayment.SalesCardNotFoundException.class)
