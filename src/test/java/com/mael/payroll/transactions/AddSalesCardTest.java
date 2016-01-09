@@ -35,7 +35,7 @@ public class AddSalesCardTest {
         addSalesCard = new AddSalesCard(payrollDB, 1, monday, 100.0);
         addSalesCard.execute();
 
-        SalesCard salesCard = ((CommissionedPayment) employee.getPaymentType()).getSalesCard();
+        SalesCard salesCard = ((CommissionedPayment) employee.getPaymentType()).getSalesCard(monday);
         assertEquals(monday, salesCard.getDate());
         assertEquals(100.0, salesCard.getAmount(), 0.001);
     }

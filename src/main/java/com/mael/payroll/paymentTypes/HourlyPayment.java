@@ -38,7 +38,7 @@ public class HourlyPayment implements PaymentType {
     public double calculatePay(LocalDate payDay) {
         double pay = 0.0;
         for(TimeCard timeCard : timeCards) {
-            if (inCurrenWeek(payDay, timeCard)) {
+            if (isInPeriod(payDay, timeCard)) {
                 pay += calculatePayFor(timeCard);
             }
         }
@@ -51,7 +51,7 @@ public class HourlyPayment implements PaymentType {
         return (normalHours + extraHours * 1.5) * getHourlyRate();
     }
 
-    private boolean inCurrenWeek(LocalDate payDay, TimeCard timeCard) {
+    private boolean isInPeriod(LocalDate payDay, TimeCard timeCard) {
         return timeCard.getDate().isAfter(payDay.minusDays(5));
     }
 

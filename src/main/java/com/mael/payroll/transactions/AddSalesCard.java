@@ -24,7 +24,7 @@ public class AddSalesCard {
         Employee employee = payrollDB.getEmployee(employeeId);
 
         try {
-            ((CommissionedPayment) employee.getPaymentType()).setSalesCard(new SalesCard(date, amount));
+            ((CommissionedPayment) employee.getPaymentType()).addSalesCard(new SalesCard(date, amount));
         } catch (ClassCastException e) {
             throw new PaymentTypeMismatchException();
         }
