@@ -3,15 +3,18 @@ package com.mael.payroll.paymentTypes;
 import com.mael.payroll.cards.SalesCard;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CommissionedPayment implements PaymentType {
     private double monthlyRate;
     private double commission;
-    private SalesCard salesCard;
+    private List<SalesCard> salesCards;
 
     public CommissionedPayment(double monthlyRate, double commission) {
         this.monthlyRate = monthlyRate;
         this.commission  = commission;
+        this.salesCards  = new ArrayList<>();
     }
 
     public double getMonthlyRate() {
@@ -22,16 +25,38 @@ public class CommissionedPayment implements PaymentType {
         return commission;
     }
 
-    public void setSalesCard(SalesCard salesCard) {
-        this.salesCard = salesCard;
+    public void addSalesCard(SalesCard salesCard) {
+        this.salesCards.add(salesCard);
     }
 
-    public SalesCard getSalesCard() {
-        return salesCard;
+    public SalesCard getSalesCard(LocalDate date) {
+        for(SalesCard salesCard : salesCards) {
+            if (salesCard.getDate() == date) {
+                return salesCard;
+            }
+        }
+        throw new SalesCardNotFoundException();
     }
 
     @Override
     public double calculatePay(LocalDate payDay) {
-        return 0;
+        double pay = 0.0;
+        for(SalesCard salesCard : salesCards) {
+            if (isInPeriod(payDay, salesCard)) {
+                pay += calculatePayFor(salesCard);
+            }
+        }
+        return pay;
+    }
+
+    private double calculatePayFor(SalesCard salesCard) {
+        return getMonthlyRate() + (salesCard.getAmount() * getCommission() / 100.0);
+    }
+
+    private boolean isInPeriod(LocalDate payDay, SalesCard salesCard) {
+        return salesCard.getDate().isAfter(payDay.minusDays(15));
+    }
+
+    public class SalesCardNotFoundException extends RuntimeException {
     }
 }
