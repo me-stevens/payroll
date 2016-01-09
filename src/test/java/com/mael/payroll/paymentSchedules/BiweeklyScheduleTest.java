@@ -20,19 +20,19 @@ public class BiweeklyScheduleTest {
 	}
 
 	@Test
-	public void itIsPayDayIfItsFridayAndBiweekly() {
+	public void itIsPayDayIfItIsFridayAndBiweekly() {
 		LocalDate fridayAndBiweekly = of(2016, JANUARY, 29);
 		assertTrue(biweeklySchedule.isPayDay(fridayAndBiweekly));
 	}
 
 	@Test
-	public void isNotPayDayIfItsNotFriday() {
+	public void itIsNotPayDayIfItIsNotFriday() {
 		LocalDate notAFridayAndBiweekly = of(2016, JANUARY, 30);
 		assertFalse(biweeklySchedule.isPayDay(notAFridayAndBiweekly));
 	}
 
 	@Test
-	public void isNotPayDayIfItsNotBiweekly() {
+	public void itIsNotPayDayIfItIsNotBiweekly() {
 		LocalDate fridayAndNotBiweekly = of(2016, JANUARY, 22);
 		assertFalse(biweeklySchedule.isPayDay(fridayAndNotBiweekly));
 	}
