@@ -20,13 +20,13 @@ public class WeeklyScheduleTest {
     }
 
     @Test
-    public void itIsPayDayIfItsFriday() {
+    public void itIsPayDayIfItIsFriday() {
         LocalDate friday = of(2016, JANUARY, 29);
         assertTrue(weeklySchedule.isPayDay(friday));
     }
 
     @Test
-    public void isNotPayDayIfItsNotFriday() {
+    public void itIsNotPayDayIfItIsNotFriday() {
         LocalDate notAfriday = of(2016, JANUARY, 30);
         assertFalse(weeklySchedule.isPayDay(notAfriday));
     }
