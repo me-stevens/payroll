@@ -1,15 +1,17 @@
 package com.mael.payroll.cards;
 
-public class SalesCard {
-    private double amount;
-    private int date;
+import java.time.LocalDate;
 
-    public SalesCard(int date, double amount) {
+public class SalesCard {
+    private LocalDate date;
+    private double amount;
+
+    public SalesCard(LocalDate date, double amount) {
         this.date   = date;
         this.amount = amount;
     }
 
-    public int getDate() {
+    public LocalDate getDate() {
         return date;
     }
 

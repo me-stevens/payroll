@@ -7,6 +7,10 @@ import com.mael.payroll.paymentTypes.CommissionedPayment;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.time.LocalDate;
+
+import static java.time.LocalDate.of;
+import static java.time.Month.JANUARY;
 import static org.junit.Assert.assertEquals;
 
 public class AddSalesCardTest {
@@ -14,10 +18,12 @@ public class AddSalesCardTest {
     private Employee employee;
     private PayrollDBFacade payrollDB;
     private AddSalesCard addSalesCard;
+    private LocalDate monday;
 
     @Before
     public void setUp() {
         payrollDB = new PayrollDBFacade();
+        monday    = of(2016, JANUARY, 25);
     }
 
     @Test
@@ -26,11 +32,11 @@ public class AddSalesCardTest {
         addCommissionedEmployee.execute();
         employee = payrollDB.getEmployee(1);
 
-        addSalesCard = new AddSalesCard(payrollDB, 1, 10001010, 100.0);
+        addSalesCard = new AddSalesCard(payrollDB, 1, monday, 100.0);
         addSalesCard.execute();
 
         SalesCard salesCard = ((CommissionedPayment) employee.getPaymentType()).getSalesCard();
-        assertEquals(10001010, salesCard.getDate());
+        assertEquals(monday, salesCard.getDate());
         assertEquals(100.0, salesCard.getAmount(), 0.001);
     }
 
@@ -40,7 +46,7 @@ public class AddSalesCardTest {
         addHourlyEmployee.execute();
         employee = payrollDB.getEmployee(1);
 
-        addSalesCard = new AddSalesCard(payrollDB, 1, 10001010, 100.0);
+        addSalesCard = new AddSalesCard(payrollDB, 1, monday, 100.0);
         addSalesCard.execute();
     }
 }
