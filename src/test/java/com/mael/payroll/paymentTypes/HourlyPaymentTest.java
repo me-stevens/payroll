@@ -12,64 +12,75 @@ import static org.junit.Assert.assertEquals;
 
 public class HourlyPaymentTest {
 
+    private double hourlyRate;
     private HourlyPayment hourlyPayment;
     private LocalDate friday;
+    private double hours;
 
     @Before
     public void setUp() {
-        hourlyPayment = new HourlyPayment(1000.0);
-        friday = of(2016, JANUARY, 29);
+        hourlyRate    = 1000.0;
+        hourlyPayment = new HourlyPayment(hourlyRate);
+        friday        = of(2016, JANUARY, 29);
+        hours         = 8.0;
+
     }
 
     @Test
     public void thePayIsZeroIfNoTimeCard() {
-        assertEquals(0.0, hourlyPayment.calculatePay(friday), 0.001);
+        assertPay(0.0);
     }
 
     @Test
     public void thePayIsHoursByRateIfOneTimeCard() {
-        hourlyPayment.addTimeCard(new TimeCard(friday, 8.0));
-        assertEquals(8.0 * 1000.0, hourlyPayment.calculatePay(friday), 0.001);
+        hourlyPayment.addTimeCard(new TimeCard(friday, hours));
+        assertPay(hours * hourlyRate);
     }
 
     @Test
     public void thePayIsTheSumOfTotalHoursByRateIfTwoTimeCards() {
         LocalDate monday = of(2016, JANUARY, 25);
-        hourlyPayment.addTimeCard(new TimeCard(monday, 8.0));
+        hourlyPayment.addTimeCard(new TimeCard(monday, hours));
 
         LocalDate tuesday = of(2016, JANUARY, 26);
-        hourlyPayment.addTimeCard(new TimeCard(tuesday, 8.0));
+        hourlyPayment.addTimeCard(new TimeCard(tuesday, hours));
 
-        assertEquals(8.0 * 1000.0 + 8.0 * 1000.0, hourlyPayment.calculatePay(friday), 0.001);
+        assertPay(hours * hourlyRate + hours * hourlyRate);
     }
 
     @Test
     public void extraHoursArePaidMoreThanNormalHours() {
-        LocalDate monday = of(2016, JANUARY, 25);
-        hourlyPayment.addTimeCard(new TimeCard(monday, 10.0));
-        assertEquals((8.0 + 2.0 * 1.5) * 1000.0, hourlyPayment.calculatePay(friday), 0.001);
+        LocalDate monday  = of(2016, JANUARY, 25);
+        double extraHours = 2.0;
+        hourlyPayment.addTimeCard(new TimeCard(monday, hours + extraHours));
+        assertPay((hours + extraHours * 1.5) * hourlyRate);
     }
 
     @Test
     public void paysLessThanEightHours() {
         LocalDate monday = of(2016, JANUARY, 25);
         hourlyPayment.addTimeCard(new TimeCard(monday, 5.0));
-        assertEquals(5.0 * 1000.0, hourlyPayment.calculatePay(friday), 0.001);
+        assertPay(5.0 * hourlyRate);
     }
 
     @Test
     public void thePayIsCalculatedWithTheTimeCardsOfCurrentWeekOnly() {
         LocalDate lastWeek = of(2016, JANUARY, 22);
-        hourlyPayment.addTimeCard(new TimeCard(lastWeek, 8.0));
+        hourlyPayment.addTimeCard(new TimeCard(lastWeek, hours));
 
         LocalDate monday = of(2016, JANUARY, 25);
-        hourlyPayment.addTimeCard(new TimeCard(monday, 8.0));
+        hourlyPayment.addTimeCard(new TimeCard(monday, hours));
 
-        assertEquals(8.0 * 1000.0, hourlyPayment.calculatePay(friday), 0.001);
+        assertPay(hours * hourlyRate);
     }
 
     @Test (expected = HourlyPayment.TimeCardNotFoundException.class)
     public void throwsExceptionIfNoTimeCardIsFoundForADate() {
         hourlyPayment.getTimeCard(friday);
     }
+
+    private void assertPay(double expectedPay) {
+        assertEquals(expectedPay, hourlyPayment.calculatePay(friday), 0.001);
+    }
 }
+
