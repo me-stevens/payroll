@@ -1,5 +1,7 @@
 package com.mael.payroll;
 
+import com.mael.payroll.affiliations.Affiliation;
+import com.mael.payroll.affiliations.NoAffiliation;
 import com.mael.payroll.paymentMethods.PaymentMethod;
 import com.mael.payroll.paymentSchedules.PaymentSchedule;
 import com.mael.payroll.paymentTypes.PaymentType;
@@ -13,10 +15,12 @@ public class Employee {
     private PaymentType paymentType;
     private PaymentSchedule paymentSchedule;
     private PaymentMethod paymentMethod;
+    private Affiliation affiliation;
 
     public Employee(String name, String address) {
         this.name    = name;
         this.address = address;
+        affiliation  = new NoAffiliation();
     }
 
     public void setName(String name) {
@@ -59,9 +63,19 @@ public class Employee {
         return paymentMethod;
     }
 
+    public void setAffiliation(Affiliation affiliation) {
+        this.affiliation = affiliation;
+    }
+
+    public Affiliation getAffiliation() {
+        return affiliation;
+    }
+
     public void getPaid(Paycheck paycheck) {
-        double netPay = getPaymentType().calculatePay(paycheck.getDate());
-        paycheck.setNetPay(netPay);
+        double grossPay   = getPaymentType().calculatePay(paycheck.getDate());
+        double deductions = getAffiliation().calculateDeductions(paycheck.getDate());
+
+        paycheck.setNetPay(grossPay - deductions);
     }
 
     public boolean isPayDay(LocalDate date) {
