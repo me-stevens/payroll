@@ -24,7 +24,7 @@ public abstract class AddEmployee {
         this.address    = address;
     }
 
-    void execute() {
+    public void execute() {
         Employee employee = new Employee(name, address);
 
         employee.setPaymentType(getPaymentType());
