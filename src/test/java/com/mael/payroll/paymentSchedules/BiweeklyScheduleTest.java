@@ -15,25 +15,25 @@ public class BiweeklyScheduleTest {
 	private PaymentSchedule biweeklySchedule;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		biweeklySchedule = new BiweeklySchedule();
 	}
 
 	@Test
 	public void itIsPayDayIfItIsFridayAndBiweekly() {
-		LocalDate fridayAndBiweekly = of(2016, JANUARY, 29);
-		assertTrue(biweeklySchedule.isPayDay(fridayAndBiweekly));
+		LocalDate fridayAndBiweekly = of(2016, JANUARY, 22);
+        assertTrue(biweeklySchedule.isPayDay(fridayAndBiweekly));
 	}
 
 	@Test
 	public void itIsNotPayDayIfItIsNotFriday() {
-		LocalDate notAFridayAndBiweekly = of(2016, JANUARY, 30);
-		assertFalse(biweeklySchedule.isPayDay(notAFridayAndBiweekly));
+		LocalDate notAFridayAndBiweekly = of(2016, JANUARY, 23);
+        assertFalse(biweeklySchedule.isPayDay(notAFridayAndBiweekly));
 	}
 
 	@Test
 	public void itIsNotPayDayIfItIsNotBiweekly() {
-		LocalDate fridayAndNotBiweekly = of(2016, JANUARY, 22);
-		assertFalse(biweeklySchedule.isPayDay(fridayAndNotBiweekly));
+		LocalDate fridayAndNotBiweekly = of(2016, JANUARY, 29);
+        assertFalse(biweeklySchedule.isPayDay(fridayAndNotBiweekly));
 	}
 }
