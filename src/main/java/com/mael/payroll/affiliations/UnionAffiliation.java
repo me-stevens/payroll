@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UnionAffiliation {
+public class UnionAffiliation implements Affiliation {
 
     private double fees;
     private List<AffiliationCard> affiliationCards;
@@ -32,6 +32,7 @@ public class UnionAffiliation {
         throw new AffiliationCardNotFoundException();
     }
 
+    @Override
     public double calculateDeductions(LocalDate payDay) {
         return getFees() + getCharges(payDay);
     }

@@ -1,5 +1,6 @@
 package com.mael.payroll;
 
+import com.mael.payroll.affiliations.*;
 import com.mael.payroll.paymentMethods.*;
 import com.mael.payroll.paymentSchedules.*;
 import com.mael.payroll.paymentTypes.*;
@@ -59,14 +60,33 @@ public class EmployeeTest {
     }
 
     @Test
-    public void aMonthlyEmployeeGetsPaid() {
-        employee.setPaymentType(new MonthlyPayment(1000.0));
-        employee.setPaymentSchedule(new MonthlySchedule());
-        employee.setPaymentMethod(new HoldMethod(employee.getAddress()));
+    public void ifNoAffiliationsHoldsANoAffiliation() {
+        assertTrue(employee.getAffiliation() instanceof NoAffiliation);
+    }
 
+    @Test
+    public void addsAnAffiliation() {
+        UnionAffiliation unionAffiliation = new UnionAffiliation(100.0);
+        employee.setAffiliation(unionAffiliation);
+        assertEquals(unionAffiliation, employee.getAffiliation());
+    }
+
+    @Test
+    public void aMonthlyEmployeeWithNoAffiliationGetsPaid() {
+        setMonthlyEmployee(1000.0);
         Paycheck paycheck = new Paycheck(of(2016, JANUARY, 31));
         employee.getPaid(paycheck);
         assertEquals(1000.0, paycheck.getNetPay(), 0.001);
+    }
+
+    @Test
+    public void aMonthlyEmployeeWithAffiliationGetsPaid() {
+        setMonthlyEmployee(1000.0);
+        Affiliation affiliation = new UnionAffiliation(100.0);
+        employee.setAffiliation(affiliation);
+        Paycheck paycheck = new Paycheck(of(2016, JANUARY, 31));
+        employee.getPaid(paycheck);
+        assertEquals(1000.0 - 100.0, paycheck.getNetPay(), 0.001);
     }
 
     @Test
@@ -74,6 +94,12 @@ public class EmployeeTest {
         employee.setPaymentSchedule(new MonthlySchedule());
         assertTrue(employee.isPayDay(of(2016, JANUARY, 31)));
         assertFalse(employee.isPayDay(of(2016, JANUARY, 30)));
+    }
+
+    private void setMonthlyEmployee(double salary) {
+        employee.setPaymentType(new MonthlyPayment(salary));
+        employee.setPaymentSchedule(new MonthlySchedule());
+        employee.setPaymentMethod(new HoldMethod(employee.getAddress()));
     }
 
 
