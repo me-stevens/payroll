@@ -17,7 +17,7 @@ public class AffiliationCardTest {
     @Before
     public void setUp() {
         friday  = of(2016, JANUARY, 29);
-        charges = 100.0;
+        charges = 50.0;
     }
 
     @Test

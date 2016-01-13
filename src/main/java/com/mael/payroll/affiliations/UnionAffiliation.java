@@ -16,8 +16,14 @@ public class UnionAffiliation implements Affiliation {
         this.affiliationCards = new ArrayList<>();
     }
 
+    @Override
     public double getFees() {
         return fees;
+    }
+
+    @Override
+    public double calculateDeductions(LocalDate payDay) {
+        return getFees() + getCharges(payDay);
     }
 
     public void addAffiliationCard(AffiliationCard affiliationCard) {
@@ -30,11 +36,6 @@ public class UnionAffiliation implements Affiliation {
             return affiliationCard;
         }
         throw new AffiliationCardNotFoundException();
-    }
-
-    @Override
-    public double calculateDeductions(LocalDate payDay) {
-        return getFees() + getCharges(payDay);
     }
 
     private double getCharges(LocalDate payDay) {

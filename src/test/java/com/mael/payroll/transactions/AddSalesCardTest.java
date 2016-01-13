@@ -15,7 +15,6 @@ import static org.junit.Assert.assertEquals;
 
 public class AddSalesCardTest {
 
-    private Employee employee;
     private PayrollDBFacade payrollDB;
     private AddSalesCard addSalesCard;
     private LocalDate monday;
@@ -30,7 +29,7 @@ public class AddSalesCardTest {
     public void addsSalesCardToCommissionedEmployee() {
         AddEmployee addCommissionedEmployee = new AddCommissionedEmployee(payrollDB, 1, "Squiddo", "FishBowl", 1000.0, 2.0);
         addCommissionedEmployee.execute();
-        employee = payrollDB.getEmployee(1);
+        Employee employee = payrollDB.getEmployee(1);
 
         addSalesCard = new AddSalesCard(payrollDB, 1, monday, 100.0);
         addSalesCard.execute();
@@ -44,7 +43,6 @@ public class AddSalesCardTest {
     public void onlyCommissionedEmployeesCanHaveSalesCards() {
         AddEmployee addHourlyEmployee = new AddHourlyEmployee(payrollDB, 1, "Squiddo", "FishBowl", 1000.0);
         addHourlyEmployee.execute();
-        employee = payrollDB.getEmployee(1);
 
         addSalesCard = new AddSalesCard(payrollDB, 1, monday, 100.0);
         addSalesCard.execute();

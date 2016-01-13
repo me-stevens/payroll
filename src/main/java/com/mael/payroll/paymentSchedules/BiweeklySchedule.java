@@ -7,7 +7,6 @@ import java.util.Locale;
 import static java.time.DayOfWeek.FRIDAY;
 
 public class BiweeklySchedule implements PaymentSchedule {
-
     @Override
     public boolean isPayDay(LocalDate date) {
         return isFriday(date) && isBiweekly(date);
@@ -18,7 +17,11 @@ public class BiweeklySchedule implements PaymentSchedule {
     }
 
     private boolean isBiweekly(LocalDate date) {
-        int weekOfYear = date.get(WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear());
+        int weekOfYear = getWeekOfYear(date);
         return weekOfYear % 2 == 0;
+    }
+
+    private int getWeekOfYear(LocalDate date) {
+        return date.get(WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear());
     }
 }

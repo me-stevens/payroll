@@ -5,6 +5,7 @@ import java.time.LocalDate;
 public interface Affiliation {
 
     double getFees();
+
     double calculateDeductions(LocalDate payDay);
 
 }
