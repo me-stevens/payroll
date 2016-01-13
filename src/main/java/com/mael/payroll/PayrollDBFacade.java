@@ -43,6 +43,10 @@ public class PayrollDBFacade {
         throw new UnionMemberNotInDBException();
     }
 
+    public void deleteUnionMember(int memberId) {
+        unionMembers.remove(memberId);
+    }
+
     private boolean employeeExists(int employeeId) {
         return listOfEmployees.containsKey(employeeId);
     }

@@ -29,6 +29,12 @@ public class PayrollDBFacadeTest {
         payrollDB.getEmployee(2);
     }
 
+    @Test (expected = PayrollDBFacade.EmployeeNotInDBException.class)
+    public void deletesEmployee() {
+        payrollDB.deleteEmployee(employeeId);
+        payrollDB.getEmployee(employeeId);
+    }
+
     @Test
     public void getsAllEmployees() {
         assertEquals(1, payrollDB.getAllEmployees().size());
@@ -43,6 +49,14 @@ public class PayrollDBFacadeTest {
 
     @Test (expected = PayrollDBFacade.UnionMemberNotInDBException.class)
     public void throwsExceptionIfUnionMemberNotInDB() {
+        payrollDB.getUnionMember(employeeId);
+    }
+
+    @Test (expected = PayrollDBFacade.UnionMemberNotInDBException.class)
+    public void deletesAUnionMember() {
+        int memberId = 10;
+        payrollDB.addUnionMember(memberId, employeeId);
+        payrollDB.deleteUnionMember(memberId);
         payrollDB.getUnionMember(employeeId);
     }
 }
