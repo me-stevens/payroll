@@ -16,6 +16,7 @@ public class UnionAffiliation implements Affiliation {
         this.affiliationCards = new ArrayList<>();
     }
 
+    @Override
     public double getFees() {
         return fees;
     }
