@@ -10,10 +10,12 @@ public class PayrollDBFacadeTest {
     private PayrollDBFacade payrollDB;
     private Employee employee;
     private int employeeId;
+    private int memberId;
 
     @Before
     public void setUp() {
         employeeId = 1;
+        memberId   = 10;
         payrollDB  = new PayrollDBFacade();
         employee   = new Employee("name", "address");
         payrollDB.addEmployee(employeeId, employee);
@@ -42,19 +44,24 @@ public class PayrollDBFacadeTest {
 
     @Test
     public void addsAUnionMember() {
-        int memberId = 10;
         payrollDB.addUnionMember(memberId, employeeId);
         assertEquals(employee, payrollDB.getUnionMember(memberId));
     }
 
+    @Test
+    public void getsUnionMemberEmployeeId() {
+        payrollDB.addUnionMember(memberId, employeeId);
+        assertEquals(employeeId, payrollDB.getUnionEmployeeId(memberId));
+    }
+
     @Test (expected = PayrollDBFacade.UnionMemberNotInDBException.class)
     public void throwsExceptionIfUnionMemberNotInDB() {
-        payrollDB.getUnionMember(employeeId);
+        payrollDB.getUnionMember(memberId);
+        payrollDB.getUnionEmployeeId(memberId);
     }
 
     @Test (expected = PayrollDBFacade.UnionMemberNotInDBException.class)
     public void deletesAUnionMember() {
-        int memberId = 10;
         payrollDB.addUnionMember(memberId, employeeId);
         payrollDB.deleteUnionMember(memberId);
         payrollDB.getUnionMember(employeeId);
