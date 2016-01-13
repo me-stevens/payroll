@@ -6,9 +6,11 @@ import java.util.Map;
 public class PayrollDBFacade {
 
     private Map<Integer, Employee> listOfEmployees;
+    private Map<Integer, Integer>  unionMembers;
 
     public PayrollDBFacade() {
         listOfEmployees = new HashMap<>();
+        unionMembers    = new HashMap<>();
     }
 
     public void addEmployee(int employeeId, Employee employee) {
@@ -16,7 +18,7 @@ public class PayrollDBFacade {
     }
 
     public Employee getEmployee(int employeeId) {
-        if (listOfEmployees.containsKey(employeeId)) {
+        if (employeeExists(employeeId)) {
             return listOfEmployees.get(employeeId);
         }
         throw new EmployeeNotInDBException();
@@ -30,6 +32,32 @@ public class PayrollDBFacade {
         return listOfEmployees;
     }
 
+    public void addUnionMember(int memberId, int employeeId) {
+        this.unionMembers.put(memberId, employeeId);
+    }
+
+    public Employee getUnionMember(int memberId) {
+        if (employeeExistsAndIsMember(memberId)) {
+            return getEmployee(unionMembers.get(memberId));
+        }
+        throw new UnionMemberNotInDBException();
+    }
+
+    private boolean employeeExists(int employeeId) {
+        return listOfEmployees.containsKey(employeeId);
+    }
+
+    private boolean unionMemberExists(int memberId) {
+        return unionMembers.containsKey(memberId);
+    }
+
+    private boolean employeeExistsAndIsMember(int memberId) {
+        return unionMemberExists(memberId) && employeeExists(unionMembers.get(memberId));
+    }
+
     public class EmployeeNotInDBException extends RuntimeException {
+    }
+
+    public class UnionMemberNotInDBException extends RuntimeException {
     }
 }

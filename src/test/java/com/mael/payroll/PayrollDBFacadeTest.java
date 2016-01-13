@@ -8,28 +8,41 @@ import static org.junit.Assert.assertEquals;
 public class PayrollDBFacadeTest {
 
     private PayrollDBFacade payrollDB;
+    private Employee employee;
+    private int employeeId;
 
     @Before
     public void setUp() {
-        payrollDB = new PayrollDBFacade();
+        employeeId = 1;
+        payrollDB  = new PayrollDBFacade();
+        employee   = new Employee("name", "address");
+        payrollDB.addEmployee(employeeId, employee);
     }
 
     @Test
     public void addsAnEmployeeToTheDB() {
-        Employee employee = new Employee("name", "address");
-        payrollDB.addEmployee(1, employee);
-        assertEquals(employee, payrollDB.getEmployee(1));
+        assertEquals(employee, payrollDB.getEmployee(employeeId));
     }
 
     @Test(expected = PayrollDBFacade.EmployeeNotInDBException.class)
     public void throwsExceptionIfEmployeeNotInDB() {
-        payrollDB.getEmployee(1);
+        payrollDB.getEmployee(2);
     }
 
     @Test
     public void getsAllEmployees() {
-        Employee employee = new Employee("name", "address");
-        payrollDB.addEmployee(1, employee);
         assertEquals(1, payrollDB.getAllEmployees().size());
+    }
+
+    @Test
+    public void addsAUnionMember() {
+        int memberId = 10;
+        payrollDB.addUnionMember(memberId, employeeId);
+        assertEquals(employee, payrollDB.getUnionMember(memberId));
+    }
+
+    @Test (expected = PayrollDBFacade.UnionMemberNotInDBException.class)
+    public void throwsExceptionIfUnionMemberNotInDB() {
+        payrollDB.getUnionMember(employeeId);
     }
 }
