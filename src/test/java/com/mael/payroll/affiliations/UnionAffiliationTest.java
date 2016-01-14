@@ -52,11 +52,6 @@ public class UnionAffiliationTest {
         assertDeductions(fees + charges);
     }
 
-    @Test (expected = UnionAffiliation.AffiliationCardNotFoundException.class)
-    public void throwsExceptionIfNoAffiliationCardIsFoundForADate() {
-        unionAffiliation.getAffiliationCard(friday);
-    }
-
     private void assertDeductions(double deductions) {
         assertEquals(deductions, unionAffiliation.calculateDeductions(friday), 0.001);
     }

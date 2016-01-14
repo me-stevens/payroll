@@ -30,12 +30,8 @@ public class UnionAffiliation implements Affiliation {
         this.affiliationCards.add(affiliationCard);
     }
 
-    public AffiliationCard getAffiliationCard(LocalDate date) {
-        for (AffiliationCard affiliationCard : affiliationCards) {
-            if (affiliationCard.getDate() == date)
-            return affiliationCard;
-        }
-        throw new AffiliationCardNotFoundException();
+    public List<AffiliationCard> getAllCards() {
+        return affiliationCards;
     }
 
     private double getCharges(LocalDate payDay) {
@@ -50,8 +46,5 @@ public class UnionAffiliation implements Affiliation {
 
     private boolean isInPeriod(LocalDate payDay, AffiliationCard affiliationCard) {
         return affiliationCard.getDate().isAfter(payDay.minusDays(5));
-    }
-
-    public class AffiliationCardNotFoundException extends RuntimeException {
     }
 }

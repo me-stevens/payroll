@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static java.time.LocalDate.of;
 import static java.time.Month.JANUARY;
@@ -56,9 +57,9 @@ public class AddAffiliationCardTest {
         addAffiliationCard.execute();
 
         UnionAffiliation unionAffiliation = (UnionAffiliation) employee.getAffiliation();
-        AffiliationCard affiliationCard   = unionAffiliation.getAffiliationCard(monday);
-
-        assertEquals(monday,  affiliationCard.getDate());
-        assertEquals(charges, affiliationCard.getCharges(), 0.001);
+        List<AffiliationCard> affiliationCards = unionAffiliation.getAllCards();
+        assertEquals(1,       affiliationCards.size());
+        assertEquals(monday,  affiliationCards.get(0).getDate());
+        assertEquals(charges, affiliationCards.get(0).getCharges(), 0.001);
     }
 }
