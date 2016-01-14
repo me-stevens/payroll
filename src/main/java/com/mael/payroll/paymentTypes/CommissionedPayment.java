@@ -29,13 +29,8 @@ public class CommissionedPayment implements PaymentType {
         this.salesCards.add(salesCard);
     }
 
-    public SalesCard getSalesCard(LocalDate date) {
-        for(SalesCard salesCard : salesCards) {
-            if (salesCard.getDate() == date) {
-                return salesCard;
-            }
-        }
-        throw new SalesCardNotFoundException();
+    public List<SalesCard> getAllCards() {
+        return salesCards;
     }
 
     @Override
@@ -55,8 +50,5 @@ public class CommissionedPayment implements PaymentType {
 
     private boolean isInPeriod(LocalDate payDay, SalesCard salesCard) {
         return salesCard.getDate().isAfter(payDay.minusDays(15));
-    }
-
-    public class SalesCardNotFoundException extends RuntimeException {
     }
 }

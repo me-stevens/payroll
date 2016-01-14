@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
 
@@ -33,9 +34,10 @@ public class AddTimeCardTest {
         addTimeCard = new AddTimeCard(payrollDB, 1, friday, 8.0);
         addTimeCard.execute();
 
-        TimeCard timeCard = ((HourlyPayment)employee.getPaymentType()).getTimeCard(friday);
-        assertEquals(friday, timeCard.getDate());
-        assertEquals(8.0, timeCard.getHours(), 0.001);
+        List<TimeCard> timeCards = ((HourlyPayment)employee.getPaymentType()).getAllCards();
+        assertEquals(1,      timeCards.size());
+        assertEquals(friday, timeCards.get(0).getDate());
+        assertEquals(8.0,    timeCards.get(0).getHours(), 0.001);
     }
 
     @Test (expected = PaymentTypeMismatchException.class)

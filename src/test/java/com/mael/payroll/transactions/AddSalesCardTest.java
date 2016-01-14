@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static java.time.LocalDate.of;
 import static java.time.Month.JANUARY;
@@ -34,9 +35,10 @@ public class AddSalesCardTest {
         addSalesCard = new AddSalesCard(payrollDB, 1, monday, 100.0);
         addSalesCard.execute();
 
-        SalesCard salesCard = ((CommissionedPayment) employee.getPaymentType()).getSalesCard(monday);
-        assertEquals(monday, salesCard.getDate());
-        assertEquals(100.0, salesCard.getAmount(), 0.001);
+        List<SalesCard> salesCards = ((CommissionedPayment) employee.getPaymentType()).getAllCards();
+        assertEquals(1,      salesCards.size());
+        assertEquals(monday, salesCards.get(0).getDate());
+        assertEquals(100.0,  salesCards.get(0).getAmount(), 0.001);
     }
 
     @Test (expected = PaymentTypeMismatchException.class)

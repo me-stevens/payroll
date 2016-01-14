@@ -52,8 +52,9 @@ public class HourlyPaymentTest {
     public void extraHoursArePaidMoreThanNormalHours() {
         LocalDate monday  = of(2016, JANUARY, 25);
         double extraHours = 2.0;
+        double bonus      = 0.5 * hourlyRate;
         hourlyPayment.addTimeCard(new TimeCard(monday, hours + extraHours));
-        assertPay((hours + extraHours * 1.5) * hourlyRate);
+        assertPay((hours + extraHours) * hourlyRate + (extraHours * bonus));
     }
 
     @Test
@@ -72,11 +73,6 @@ public class HourlyPaymentTest {
         hourlyPayment.addTimeCard(new TimeCard(monday, hours));
 
         assertPay(hours * hourlyRate);
-    }
-
-    @Test (expected = HourlyPayment.TimeCardNotFoundException.class)
-    public void throwsExceptionIfNoTimeCardIsFoundForADate() {
-        hourlyPayment.getTimeCard(friday);
     }
 
     private void assertPay(double expectedPay) {

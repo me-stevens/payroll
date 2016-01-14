@@ -61,11 +61,6 @@ public class CommissionedPaymentTest {
         assertPay(monthlyRate + (amount * commission / 100.0));
     }
 
-    @Test (expected = CommissionedPayment.SalesCardNotFoundException.class)
-    public void throwsExceptionIfNoSalesCardIsFoundForADate() {
-        commissionedPayment.getSalesCard(fridayAndBiweekly);
-    }
-
     private void assertPay(double expectedPay) {
         assertEquals(expectedPay, commissionedPayment.calculatePay(fridayAndBiweekly), 0.001);
     }
