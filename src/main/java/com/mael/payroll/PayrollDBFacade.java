@@ -37,17 +37,19 @@ public class PayrollDBFacade {
     }
 
     public Employee getUnionMember(int memberId) {
-        if (employeeExistsAndIsMember(memberId)) {
+        try {
             return getEmployee(unionMembers.get(memberId));
+        } catch (NullPointerException e) {
+            throw new UnionMemberNotInDBException();
         }
-        throw new UnionMemberNotInDBException();
     }
 
     public int getUnionEmployeeId(int memberId) {
-        if (employeeExistsAndIsMember(memberId)) {
+        try {
             return unionMembers.get(memberId);
+        } catch (NullPointerException e) {
+            throw new UnionMemberNotInDBException();
         }
-        throw new UnionMemberNotInDBException();
     }
 
     public void deleteUnionMember(int memberId) {
@@ -56,14 +58,6 @@ public class PayrollDBFacade {
 
     private boolean employeeExists(int employeeId) {
         return listOfEmployees.containsKey(employeeId);
-    }
-
-    private boolean unionMemberExists(int memberId) {
-        return unionMembers.containsKey(memberId);
-    }
-
-    private boolean employeeExistsAndIsMember(int memberId) {
-        return unionMemberExists(memberId) && employeeExists(unionMembers.get(memberId));
     }
 
     public class EmployeeNotInDBException extends RuntimeException {
