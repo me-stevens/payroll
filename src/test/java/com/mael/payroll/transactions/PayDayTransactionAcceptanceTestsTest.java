@@ -2,6 +2,8 @@ package com.mael.payroll.transactions;
 
 import com.mael.payroll.Paycheck;
 import com.mael.payroll.PayrollDBFacade;
+import com.mael.payroll.transactions.addCard.AddTimeCard;
+import com.mael.payroll.transactions.addEmployee.*;
 import org.junit.Before;
 import org.junit.Test;
 

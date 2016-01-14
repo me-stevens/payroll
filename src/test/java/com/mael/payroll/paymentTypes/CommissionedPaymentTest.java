@@ -1,7 +1,6 @@
 package com.mael.payroll.paymentTypes;
 
 import com.mael.payroll.cards.SalesCard;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
