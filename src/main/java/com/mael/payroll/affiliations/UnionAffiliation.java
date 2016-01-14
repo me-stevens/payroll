@@ -21,21 +21,17 @@ public class UnionAffiliation implements Affiliation {
         return fees;
     }
 
+    @Override
+    public double calculateDeductions(LocalDate payDay) {
+        return getFees() + getCharges(payDay);
+    }
+
     public void addAffiliationCard(AffiliationCard affiliationCard) {
         this.affiliationCards.add(affiliationCard);
     }
 
-    public AffiliationCard getAffiliationCard(LocalDate date) {
-        for (AffiliationCard affiliationCard : affiliationCards) {
-            if (affiliationCard.getDate() == date)
-            return affiliationCard;
-        }
-        throw new AffiliationCardNotFoundException();
-    }
-
-    @Override
-    public double calculateDeductions(LocalDate payDay) {
-        return getFees() + getCharges(payDay);
+    public List<AffiliationCard> getAllCards() {
+        return affiliationCards;
     }
 
     private double getCharges(LocalDate payDay) {
@@ -50,8 +46,5 @@ public class UnionAffiliation implements Affiliation {
 
     private boolean isInPeriod(LocalDate payDay, AffiliationCard affiliationCard) {
         return affiliationCard.getDate().isAfter(payDay.minusDays(5));
-    }
-
-    public class AffiliationCardNotFoundException extends RuntimeException {
     }
 }

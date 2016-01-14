@@ -1,10 +1,10 @@
-package com.mael.payroll.transactions;
+package com.mael.payroll.transactions.addCard;
 
 import com.mael.payroll.Employee;
 import com.mael.payroll.PayrollDBFacade;
-import com.mael.payroll.affiliations.Affiliation;
 import com.mael.payroll.affiliations.UnionAffiliation;
 import com.mael.payroll.cards.AffiliationCard;
+import com.mael.payroll.transactions.AddUnionMember;
 import com.mael.payroll.transactions.addEmployee.AddEmployee;
 import com.mael.payroll.transactions.addEmployee.AddMonthlyEmployee;
 import org.junit.Before;
@@ -56,7 +56,7 @@ public class AddAffiliationCardTest {
         addAffiliationCard = new AddAffiliationCard(payrollDB, memberId, monday, charges);
         addAffiliationCard.execute();
 
-        UnionAffiliation unionAffiliation      = (UnionAffiliation) employee.getAffiliation();
+        UnionAffiliation unionAffiliation = (UnionAffiliation) employee.getAffiliation();
         List<AffiliationCard> affiliationCards = unionAffiliation.getAllCards();
         assertEquals(1,       affiliationCards.size());
         assertEquals(monday,  affiliationCards.get(0).getDate());

@@ -101,6 +101,4 @@ public class EmployeeTest {
         employee.setPaymentSchedule(new MonthlySchedule());
         employee.setPaymentMethod(new HoldMethod(employee.getAddress()));
     }
-
-
 }

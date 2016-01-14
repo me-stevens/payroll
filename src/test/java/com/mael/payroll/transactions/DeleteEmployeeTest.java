@@ -1,6 +1,8 @@
 package com.mael.payroll.transactions;
 
 import com.mael.payroll.PayrollDBFacade;
+import com.mael.payroll.transactions.addEmployee.AddEmployee;
+import com.mael.payroll.transactions.addEmployee.AddMonthlyEmployee;
 import org.junit.Test;
 
 public class DeleteEmployeeTest {

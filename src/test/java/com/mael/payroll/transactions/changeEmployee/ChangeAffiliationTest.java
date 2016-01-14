@@ -1,23 +1,23 @@
-package com.mael.payroll.transactions;
+package com.mael.payroll.transactions.changeEmployee;
 
 import com.mael.payroll.Employee;
 import com.mael.payroll.PayrollDBFacade;
-import com.mael.payroll.affiliations.UnionAffiliation;
+import com.mael.payroll.transactions.AddUnionMember;
 import com.mael.payroll.transactions.addEmployee.AddEmployee;
 import com.mael.payroll.transactions.addEmployee.AddMonthlyEmployee;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
-public class AddUnionMemberTest {
+public class ChangeAffiliationTest {
 
+    private PayrollDBFacade payrollDB;
     private Employee employee;
     private int employeeId;
     private int memberId;
-    private PayrollDBFacade payrollDB;
     private double fees;
+
 
     @Before
     public void setUp() {
@@ -25,18 +25,23 @@ public class AddUnionMemberTest {
         memberId   = 10;
         fees       = 100.0;
         payrollDB  = new PayrollDBFacade();
-
-        AddEmployee addMonthlyEmployee = new AddMonthlyEmployee(payrollDB, employeeId, "Squiddo", "FishBowl", 1000.0);
-        addMonthlyEmployee.execute();
-
-        employee = payrollDB.getEmployee(employeeId);
     }
 
     @Test
-    public void addsAMonthlyEmployeeToTheUnion() {
+    public void changesAnAffiliationToAMonthlyEmployee() {
+        AddEmployee addMonthlyEmployee = new AddMonthlyEmployee(payrollDB, employeeId, "Squiddo", "FishBowl", 1000.0);
+        addMonthlyEmployee.execute();
+        employee = payrollDB.getEmployee(employeeId);
+
         AddUnionMember addUnionMember = new AddUnionMember(payrollDB, memberId, employeeId, fees);
         addUnionMember.execute();
-        assertEquals(employee, payrollDB.getUnionMember(memberId));
-        assertTrue(employee.getAffiliation() instanceof UnionAffiliation);
+
+        int newMemberId = 20;
+        double newFees  = 200.0;
+        ChangeAffiliation changeAffiliation = new ChangeAffiliation(payrollDB, memberId, newMemberId, newFees);
+        changeAffiliation.execute();
+
+        assertEquals(employee, payrollDB.getUnionMember(newMemberId));
+        assertEquals(newFees, employee.getAffiliation().getFees(), 0.001);
     }
 }

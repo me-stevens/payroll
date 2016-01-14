@@ -64,6 +64,6 @@ public class PayrollDBFacadeTest {
     public void deletesAUnionMember() {
         payrollDB.addUnionMember(memberId, employeeId);
         payrollDB.deleteUnionMember(memberId);
-        payrollDB.getUnionMember(employeeId);
+        payrollDB.getUnionMember(memberId);
     }
 }
