@@ -37,6 +37,11 @@ public class PayrollDBFacadeTest {
         payrollDB.getEmployee(employeeId);
     }
 
+    @Test (expected = PayrollDBFacade.EmployeeNotInDBException.class)
+    public void throwsExceptionIfEmployeeToBeDeletedDoesntExist() {
+        payrollDB.deleteEmployee(2);
+    }
+
     @Test
     public void getsAllEmployees() {
         assertEquals(1, payrollDB.getAllEmployees().size());
@@ -54,16 +59,26 @@ public class PayrollDBFacadeTest {
         assertEquals(employeeId, payrollDB.getUnionEmployeeId(memberId));
     }
 
-    @Test (expected = PayrollDBFacade.UnionMemberNotInDBException.class)
+    @Test (expected = PayrollDBFacade.NotAUnionMemberException.class)
     public void throwsExceptionIfUnionMemberNotInDB() {
         payrollDB.getUnionMember(memberId);
         payrollDB.getUnionEmployeeId(memberId);
     }
 
-    @Test (expected = PayrollDBFacade.UnionMemberNotInDBException.class)
+    @Test (expected = PayrollDBFacade.NotAUnionMemberException.class)
     public void deletesAUnionMember() {
         payrollDB.addUnionMember(memberId, employeeId);
         payrollDB.deleteUnionMember(memberId);
         payrollDB.getUnionMember(memberId);
+    }
+
+    @Test (expected = PayrollDBFacade.NotAUnionMemberException.class)
+    public void throwsAnExceptionIfUnionMemberToBeDeletedDoesntExist() {
+        payrollDB.deleteUnionMember(memberId);
+    }
+
+    @Test (expected = PayrollDBFacade.NotAUnionMemberException.class)
+    public void throwsAnExceptionIfNoMemberIdIsFoundForAnEmployeeId() {
+        payrollDB.getUnionMemberId(memberId);
     }
 }

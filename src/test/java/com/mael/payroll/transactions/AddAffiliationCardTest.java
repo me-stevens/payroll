@@ -42,7 +42,7 @@ public class AddAffiliationCardTest {
         employee = payrollDB.getEmployee(employeeId);
     }
 
-    @Test (expected = PayrollDBFacade.UnionMemberNotInDBException.class)
+    @Test (expected = PayrollDBFacade.NotAUnionMemberException.class)
     public void throwsAnExceptionIfEmployeeHasNoAffiliation() {
         addAffiliationCard = new AddAffiliationCard(payrollDB, memberId, monday, charges);
         addAffiliationCard.execute();

@@ -32,7 +32,7 @@ public class DeleteUnionMemberTest {
         deleteUnionMember.execute();
     }
 
-    @Test (expected = PayrollDBFacade.UnionMemberNotInDBException.class)
+    @Test (expected = PayrollDBFacade.NotAUnionMemberException.class)
     public void deletesUnionMemberThatIsAMonthlyEmployee() {
         payrollDB.getUnionMember(memberId);
     }
