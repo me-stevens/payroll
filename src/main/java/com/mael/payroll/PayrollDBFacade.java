@@ -56,6 +56,12 @@ public class PayrollDBFacade {
             throw new NotAUnionMemberException();
         }
     }
+
+    public int getUnionMemberId(int employeeId) {
+        for (Map.Entry<Integer, Integer> unionMemberIds : unionMembers.entrySet()) {
+            if (unionMemberIds.getValue() == employeeId) {
+                return unionMemberIds.getKey();
+            }
         }
         throw new NotAUnionMemberException();
     }

@@ -77,6 +77,12 @@ public class PayrollDBFacadeTest {
         payrollDB.deleteUnionMember(memberId);
     }
 
+    @Test
+    public void givenAnEmployeeIdReturnsTheMemberId() {
+        payrollDB.addUnionMember(10, 1);
+        assertEquals(10, payrollDB.getUnionMemberId(employeeId));
+    }
+
     @Test (expected = PayrollDBFacade.NotAUnionMemberException.class)
     public void throwsAnExceptionIfNoMemberIdIsFoundForAnEmployeeId() {
         payrollDB.getUnionMemberId(memberId);

@@ -2,7 +2,6 @@ package com.mael.payroll.transactions;
 
 import com.mael.payroll.Employee;
 import com.mael.payroll.PayrollDBFacade;
-import com.mael.payroll.affiliations.Affiliation;
 import com.mael.payroll.affiliations.UnionAffiliation;
 import com.mael.payroll.cards.AffiliationCard;
 import com.mael.payroll.transactions.addEmployee.AddEmployee;

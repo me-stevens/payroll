@@ -13,6 +13,15 @@ public class DeleteEmployee {
     }
 
     public void execute() {
+        deleteMembershipIfAny();
         payrollDB.deleteEmployee(employeeId);
+    }
+
+    private void deleteMembershipIfAny() {
+        try {
+            int memberId = payrollDB.getUnionMemberId(employeeId);
+            payrollDB.deleteUnionMember(memberId);
+        } catch (PayrollDBFacade.NotAUnionMemberException e) {
+        }
     }
 }
