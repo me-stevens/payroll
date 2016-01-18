@@ -8,6 +8,9 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
+import static java.time.LocalDate.of;
+import static java.time.Month.JANUARY;
+
 public class PayDayTransaction {
 
     private final PayrollDBFacade payrollDB;
@@ -26,9 +29,10 @@ public class PayDayTransaction {
             Employee employee = employeeRecord.getValue();
 
             if (employee.isPayDay(payDay)) {
-                Paycheck payCheck = new Paycheck(payDay);
-                payChecks.put(employeeRecord.getKey(), payCheck);
-                employee.getPaid(payCheck);
+                payChecks.put(
+                        employeeRecord.getKey(),
+                        new Paycheck(payDay, employee)
+                );
             }
         }
     }

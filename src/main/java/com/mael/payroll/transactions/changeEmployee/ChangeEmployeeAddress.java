@@ -14,6 +14,6 @@ public class ChangeEmployeeAddress extends ChangeEmployee {
 
     @Override
     public void change(Employee employee) {
-        employee.setAddress(address);
+        employee.updateAddress(address);
     }
 }

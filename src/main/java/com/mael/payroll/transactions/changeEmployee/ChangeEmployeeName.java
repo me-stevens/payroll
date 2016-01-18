@@ -14,6 +14,6 @@ public class ChangeEmployeeName extends ChangeEmployee {
 
     @Override
     public void change(Employee employee) {
-        employee.setName(name);
+        employee.updateName(name);
     }
 }

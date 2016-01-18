@@ -28,13 +28,13 @@ public class EmployeeTest {
 
     @Test
     public void setsName() {
-        employee.setName("new name");
+        employee.updateName("new name");
         assertEquals("new name", employee.getName());
     }
 
     @Test
     public void setAddress() {
-        employee.setAddress("new address");
+        employee.updateAddress("new address");
         assertEquals("new address", employee.getAddress());
     }
 
@@ -72,33 +72,9 @@ public class EmployeeTest {
     }
 
     @Test
-    public void aMonthlyEmployeeWithNoAffiliationGetsPaid() {
-        setMonthlyEmployee(1000.0);
-        Paycheck paycheck = new Paycheck(of(2016, JANUARY, 31));
-        employee.getPaid(paycheck);
-        assertEquals(1000.0, paycheck.getNetPay(), 0.001);
-    }
-
-    @Test
-    public void aMonthlyEmployeeWithAffiliationGetsPaid() {
-        setMonthlyEmployee(1000.0);
-        Affiliation affiliation = new UnionAffiliation(100.0);
-        employee.setAffiliation(affiliation);
-        Paycheck paycheck = new Paycheck(of(2016, JANUARY, 31));
-        employee.getPaid(paycheck);
-        assertEquals(1000.0 - 100.0, paycheck.getNetPay(), 0.001);
-    }
-
-    @Test
     public void checksPayDayForMonthlyPayDay() {
         employee.setPaymentSchedule(new MonthlySchedule());
         assertTrue(employee.isPayDay(of(2016, JANUARY, 31)));
         assertFalse(employee.isPayDay(of(2016, JANUARY, 30)));
-    }
-
-    private void setMonthlyEmployee(double salary) {
-        employee.setPaymentType(new MonthlyPayment(salary));
-        employee.setPaymentSchedule(new MonthlySchedule());
-        employee.setPaymentMethod(new HoldMethod(employee.getAddress()));
     }
 }

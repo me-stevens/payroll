@@ -23,7 +23,7 @@ public class Employee {
         affiliation  = new NoAffiliation();
     }
 
-    public void setName(String name) {
+    public void updateName(String name) {
         this.name = name;
     }
 
@@ -31,7 +31,7 @@ public class Employee {
         return name;
     }
 
-    public void setAddress(String address) {
+    public void updateAddress(String address) {
         this.address = address;
     }
 
@@ -71,14 +71,15 @@ public class Employee {
         return affiliation;
     }
 
-    public void getPaid(Paycheck paycheck) {
-        double grossPay   = getPaymentType().calculatePay(paycheck.getDate());
-        double deductions = getAffiliation().calculateDeductions(paycheck.getDate());
-
-        paycheck.setNetPay(grossPay - deductions);
+    public boolean isPayDay(LocalDate date) {
+        return paymentSchedule.isPayDay(date);
     }
 
-    public boolean isPayDay(LocalDate date) {
-        return getPaymentSchedule().isPayDay(date);
+    public double grossPayFor(LocalDate date) {
+        return paymentType.calculatePay(date);
+    }
+
+    public double deductionsFor(LocalDate date) {
+        return affiliation.calculateDeductions(date);
     }
 }
