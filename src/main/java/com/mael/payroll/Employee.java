@@ -39,7 +39,7 @@ public class Employee {
         return address;
     }
 
-    public void setPaymentType(PaymentType paymentType) {
+    public void updatePaymentType(PaymentType paymentType) {
         this.paymentType = paymentType;
     }
 
@@ -47,7 +47,7 @@ public class Employee {
         return paymentType;
     }
 
-    public void setPaymentSchedule(PaymentSchedule paymentSchedule) {
+    public void updatePaymentSchedule(PaymentSchedule paymentSchedule) {
         this.paymentSchedule = paymentSchedule;
     }
 
@@ -55,7 +55,7 @@ public class Employee {
         return paymentSchedule;
     }
 
-    public void setPaymentMethod(PaymentMethod paymentMethod) {
+    public void updatePaymentMethod(PaymentMethod paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
 
@@ -63,7 +63,7 @@ public class Employee {
         return paymentMethod;
     }
 
-    public void setAffiliation(Affiliation affiliation) {
+    public void updateAffiliation(Affiliation affiliation) {
         this.affiliation = affiliation;
     }
 

@@ -14,7 +14,7 @@ public class DeleteUnionMember {
     }
 
     public void execute() {
-        payrollDB.getUnionMember(memberId).setAffiliation(new NoAffiliation());
+        payrollDB.getUnionMember(memberId).updateAffiliation(new NoAffiliation());
         payrollDB.deleteUnionMember(memberId);
     }
 }

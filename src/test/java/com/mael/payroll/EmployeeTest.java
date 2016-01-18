@@ -41,21 +41,21 @@ public class EmployeeTest {
     @Test
     public void setsPaymentType() {
         PaymentType payment = new HourlyPayment(8.0);
-        employee.setPaymentType(payment);
+        employee.updatePaymentType(payment);
         assertEquals(payment, employee.getPaymentType());
     }
 
     @Test
     public void setsPaymentSchedule() {
         PaymentSchedule schedule = new WeeklySchedule();
-        employee.setPaymentSchedule(schedule);
+        employee.updatePaymentSchedule(schedule);
         assertEquals(schedule, employee.getPaymentSchedule());
     }
 
     @Test
     public void setsPaymentMethod() {
         PaymentMethod method = new HoldMethod("address");
-        employee.setPaymentMethod(method);
+        employee.updatePaymentMethod(method);
         assertEquals(method, employee.getPaymentMethod());
     }
 
@@ -67,13 +67,13 @@ public class EmployeeTest {
     @Test
     public void addsAnAffiliation() {
         UnionAffiliation unionAffiliation = new UnionAffiliation(100.0);
-        employee.setAffiliation(unionAffiliation);
+        employee.updateAffiliation(unionAffiliation);
         assertEquals(unionAffiliation, employee.getAffiliation());
     }
 
     @Test
     public void checksPayDayForMonthlyPayDay() {
-        employee.setPaymentSchedule(new MonthlySchedule());
+        employee.updatePaymentSchedule(new MonthlySchedule());
         assertTrue(employee.isPayDay(of(2016, JANUARY, 31)));
         assertFalse(employee.isPayDay(of(2016, JANUARY, 30)));
     }

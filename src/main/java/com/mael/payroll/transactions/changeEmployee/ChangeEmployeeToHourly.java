@@ -16,7 +16,7 @@ public class ChangeEmployeeToHourly extends ChangeEmployee {
 
     @Override
     public void change(Employee employee) {
-        employee.setPaymentType(new HourlyPayment(hourlyRate));
-        employee.setPaymentSchedule(new WeeklySchedule());
+        employee.updatePaymentType(new HourlyPayment(hourlyRate));
+        employee.updatePaymentSchedule(new WeeklySchedule());
     }
 }

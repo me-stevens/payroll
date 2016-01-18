@@ -18,6 +18,6 @@ public class AddUnionMember {
 
     public void execute() {
         payrollDB.addUnionMember(memberId, employeeId);
-        payrollDB.getEmployee(employeeId).setAffiliation(new UnionAffiliation(fees));
+        payrollDB.getEmployee(employeeId).updateAffiliation(new UnionAffiliation(fees));
     }
 }

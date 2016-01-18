@@ -12,6 +12,6 @@ public class ChangePayMethodToHold extends ChangeEmployee {
 
     @Override
     public void change(Employee employee) {
-        employee.setPaymentMethod(new HoldMethod(employee.getAddress()));
+        employee.updatePaymentMethod(new HoldMethod(employee.getAddress()));
     }
 }

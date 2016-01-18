@@ -21,6 +21,6 @@ public class ChangeAffiliation {
         int employeeId = payrollDB.getUnionEmployeeId(memberId);
         payrollDB.deleteUnionMember(memberId);
         payrollDB.addUnionMember(newMemberId, employeeId);
-        payrollDB.getEmployee(employeeId).setAffiliation(new UnionAffiliation(newFees));
+        payrollDB.getEmployee(employeeId).updateAffiliation(new UnionAffiliation(newFees));
     }
 }

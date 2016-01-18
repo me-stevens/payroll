@@ -12,6 +12,6 @@ public class ChangePayMethodToMail extends ChangeEmployee {
 
     @Override
     public void change(Employee employee) {
-        employee.setPaymentMethod(new MailMethod(employee.getAddress()));
+        employee.updatePaymentMethod(new MailMethod(employee.getAddress()));
     }
 }

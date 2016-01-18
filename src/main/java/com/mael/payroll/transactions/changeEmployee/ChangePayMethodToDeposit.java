@@ -17,6 +17,6 @@ public class ChangePayMethodToDeposit extends ChangeEmployee {
 
     @Override
     public void change(Employee employee) {
-        employee.setPaymentMethod(new DepositMethod(bank, account));
+        employee.updatePaymentMethod(new DepositMethod(bank, account));
     }
 }
