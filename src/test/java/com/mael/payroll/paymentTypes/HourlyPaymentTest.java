@@ -1,6 +1,8 @@
 package com.mael.payroll.paymentTypes;
 
 import com.mael.payroll.cards.TimeCard;
+import com.mael.payroll.paymentSchedules.PaymentSchedule;
+import com.mael.payroll.paymentSchedules.WeeklySchedule;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,11 +18,13 @@ public class HourlyPaymentTest {
     private HourlyPayment hourlyPayment;
     private LocalDate friday;
     private double hours;
+    private PaymentSchedule weekly;
 
     @Before
     public void setUp() {
         hourlyRate    = 1000.0;
         hourlyPayment = new HourlyPayment(hourlyRate);
+        weekly        = new WeeklySchedule();
         friday        = of(2016, JANUARY, 29);
         hours         = 8.0;
 
@@ -76,7 +80,7 @@ public class HourlyPaymentTest {
     }
 
     private void assertPay(double expectedPay) {
-        assertEquals(expectedPay, hourlyPayment.calculatePay(friday), 0.001);
+        assertEquals(expectedPay, hourlyPayment.calculatePay(friday, weekly), 0.001);
     }
 }
 

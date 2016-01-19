@@ -1,6 +1,7 @@
 package com.mael.payroll.paymentTypes;
 
 import com.mael.payroll.cards.SalesCard;
+import com.mael.payroll.paymentSchedules.PaymentSchedule;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public class CommissionedPayment implements PaymentType {
     }
 
     @Override
-    public double calculatePay(LocalDate payDay) {
+    public double calculatePay(LocalDate payDay, PaymentSchedule paySched) {
         double pay = 0.0;
         for(SalesCard salesCard : salesCards) {
             if (isInPeriod(payDay, salesCard)) {

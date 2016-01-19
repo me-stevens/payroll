@@ -80,7 +80,7 @@ public class Employee {
     }
 
     public double grossPayFor(LocalDate date) {
-        return paymentType.calculatePay(date);
+        return paymentType.calculatePay(date, paymentSchedule);
     }
 
     public double deductionsFor(LocalDate date) {

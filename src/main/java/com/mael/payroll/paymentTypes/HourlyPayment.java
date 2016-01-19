@@ -1,6 +1,7 @@
 package com.mael.payroll.paymentTypes;
 
 import com.mael.payroll.cards.TimeCard;
+import com.mael.payroll.paymentSchedules.PaymentSchedule;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class HourlyPayment implements PaymentType {
     }
 
     @Override
-    public double calculatePay(LocalDate payDay) {
+    public double calculatePay(LocalDate payDay, PaymentSchedule paySched) {
         double pay = 0.0;
         for(TimeCard timeCard : timeCards) {
             if (isInPeriod(payDay, timeCard)) {

@@ -1,6 +1,8 @@
 package com.mael.payroll.paymentTypes;
 
 import com.mael.payroll.cards.SalesCard;
+import com.mael.payroll.paymentSchedules.BiweeklySchedule;
+import com.mael.payroll.paymentSchedules.PaymentSchedule;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,12 +18,14 @@ public class CommissionedPaymentTest {
     private double amount;
     private double commission;
     private double monthlyRate;
+    private PaymentSchedule biWeekly;
 
     @Before
     public void setUp() {
         monthlyRate         = 1000.0;
         commission          = 2.0;
         commissionedPayment = new CommissionedPayment(monthlyRate, commission);
+        biWeekly            = new BiweeklySchedule();
         fridayAndBiweekly   = of(2016, JANUARY, 29);
         amount              = 200.0;
     }
@@ -46,7 +50,7 @@ public class CommissionedPaymentTest {
         commissionedPayment.addSalesCard(new SalesCard(tuesday, amount));
 
         assertPay(monthlyRate + (amount * commission / 100.0) +
-                monthlyRate + (amount * commission / 100.0));
+                  monthlyRate + (amount * commission / 100.0));
     }
 
     @Test
@@ -61,6 +65,6 @@ public class CommissionedPaymentTest {
     }
 
     private void assertPay(double expectedPay) {
-        assertEquals(expectedPay, commissionedPayment.calculatePay(fridayAndBiweekly), 0.001);
+        assertEquals(expectedPay, commissionedPayment.calculatePay(fridayAndBiweekly, biWeekly), 0.001);
     }
 }
