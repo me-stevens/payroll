@@ -9,14 +9,14 @@ import java.util.List;
 public class HourlyPayment implements PaymentType {
     private double hourlyRate;
     private List<TimeCard> timeCards;
-    private double MAX_HOURS_PER_DAY;
-    private double BONUS;
+    private final double MAX_HOURS_PER_DAY;
+    private final double BONUS;
 
     public HourlyPayment(double hourlyRate) {
         this.hourlyRate   = hourlyRate;
         this.timeCards    = new ArrayList<>();
         MAX_HOURS_PER_DAY = 8.0;
-        BONUS             = 0.5 * hourlyRate;
+        BONUS             = 0.5;
     }
 
     public double getHourlyRate() {
@@ -44,7 +44,7 @@ public class HourlyPayment implements PaymentType {
 
     private double calculatePayFor(TimeCard timeCard) {
         double extraHours = Math.max(timeCard.getHours() - MAX_HOURS_PER_DAY, 0.0);
-        return timeCard.getHours() * getHourlyRate() + extraHours * BONUS;
+        return timeCard.getHours() * hourlyRate + extraHours * hourlyRate * BONUS;
     }
 
     private boolean isInPeriod(LocalDate payDay, TimeCard timeCard) {
