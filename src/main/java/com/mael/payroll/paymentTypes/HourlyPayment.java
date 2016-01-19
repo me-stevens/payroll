@@ -35,8 +35,8 @@ public class HourlyPayment implements PaymentType {
     @Override
     public double calculatePay(LocalDate payDay, PaymentSchedule paySched) {
         double pay = 0.0;
-        for(TimeCard timeCard : timeCards) {
-            if (isInPeriod(payDay, timeCard)) {
+        for (TimeCard timeCard : timeCards) {
+            if (timeCard.isInPeriod(payDay)) {
                 pay += calculatePayFor(timeCard);
             }
         }
@@ -46,10 +46,6 @@ public class HourlyPayment implements PaymentType {
     private double calculatePayFor(TimeCard timeCard) {
         double extraHours = Math.max(timeCard.getHours() - MAX_HOURS_PER_DAY, 0.0);
         return timeCard.getHours() * hourlyRate + extraHours * hourlyRate * BONUS;
-    }
-
-    private boolean isInPeriod(LocalDate payDay, TimeCard timeCard) {
-        return timeCard.getDate().isAfter(payDay.minusDays(5));
     }
 }
 

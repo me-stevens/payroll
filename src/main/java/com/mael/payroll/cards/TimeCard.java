@@ -18,4 +18,9 @@ public class TimeCard {
     public double getHours() {
         return hours;
     }
+
+    public boolean isInPeriod(LocalDate payDay) {
+        int daysInPeriod = 5;
+        return getDate().isAfter(payDay.minusDays(daysInPeriod));
+    }
 }

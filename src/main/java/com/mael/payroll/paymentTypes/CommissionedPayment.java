@@ -38,7 +38,7 @@ public class CommissionedPayment implements PaymentType {
     public double calculatePay(LocalDate payDay, PaymentSchedule paySched) {
         double pay = 0.0;
         for(SalesCard salesCard : salesCards) {
-            if (isInPeriod(payDay, salesCard)) {
+            if (salesCard.isInPeriod(payDay)) {
                 pay += calculatePayFor(salesCard);
             }
         }
@@ -49,7 +49,4 @@ public class CommissionedPayment implements PaymentType {
         return getMonthlyRate() + (salesCard.getAmount() * getCommission() / 100.0);
     }
 
-    private boolean isInPeriod(LocalDate payDay, SalesCard salesCard) {
-        return salesCard.getDate().isAfter(payDay.minusDays(15));
-    }
 }

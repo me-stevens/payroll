@@ -18,4 +18,9 @@ public class SalesCard {
     public double getAmount() {
         return amount;
     }
+
+    public boolean isInPeriod(LocalDate payDay) {
+        int daysInPeriod = 15;
+        return getDate().isAfter(payDay.minusDays(daysInPeriod));
+    }
 }
