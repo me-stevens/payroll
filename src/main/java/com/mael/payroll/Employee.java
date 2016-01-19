@@ -2,6 +2,7 @@ package com.mael.payroll;
 
 import com.mael.payroll.affiliations.Affiliation;
 import com.mael.payroll.affiliations.NoAffiliation;
+import com.mael.payroll.paymentMethods.HoldMethod;
 import com.mael.payroll.paymentMethods.PaymentMethod;
 import com.mael.payroll.paymentSchedules.PaymentSchedule;
 import com.mael.payroll.paymentTypes.PaymentType;
@@ -17,10 +18,13 @@ public class Employee {
     private PaymentMethod paymentMethod;
     private Affiliation affiliation;
 
-    public Employee(String name, String address) {
-        this.name    = name;
-        this.address = address;
-        affiliation  = new NoAffiliation();
+    public Employee(String name, String address, PaymentType paymentType, PaymentSchedule paymentSchedule) {
+        this.name            = name;
+        this.address         = address;
+        this.paymentType     = paymentType;
+        this.paymentSchedule = paymentSchedule;
+        this.paymentMethod   = new HoldMethod(address);
+        this.affiliation     = new NoAffiliation();
     }
 
     public void updateName(String name) {

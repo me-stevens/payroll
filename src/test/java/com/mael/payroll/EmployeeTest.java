@@ -17,7 +17,7 @@ public class EmployeeTest {
 
     @Before
     public void setUp() {
-        employee = new Employee("name", "address");
+        employee = new Employee("name", "address", new MonthlyPayment(1000.0), new MonthlySchedule());
     }
 
     @Test
@@ -54,7 +54,7 @@ public class EmployeeTest {
 
     @Test
     public void setsPaymentMethod() {
-        PaymentMethod method = new HoldMethod("address");
+        PaymentMethod method = new MailMethod("address");
         employee.updatePaymentMethod(method);
         assertEquals(method, employee.getPaymentMethod());
     }
@@ -65,7 +65,7 @@ public class EmployeeTest {
     }
 
     @Test
-    public void addsAnAffiliation() {
+    public void setsAnAffiliation() {
         UnionAffiliation unionAffiliation = new UnionAffiliation(100.0);
         employee.updateAffiliation(unionAffiliation);
         assertEquals(unionAffiliation, employee.getAffiliation());

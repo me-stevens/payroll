@@ -2,7 +2,6 @@ package com.mael.payroll.transactions.addEmployee;
 
 import com.mael.payroll.Employee;
 import com.mael.payroll.PayrollDBFacade;
-import com.mael.payroll.paymentMethods.HoldMethod;
 import com.mael.payroll.paymentSchedules.PaymentSchedule;
 import com.mael.payroll.paymentTypes.PaymentType;
 
@@ -25,12 +24,7 @@ public abstract class AddEmployee {
     }
 
     public void execute() {
-        Employee employee = new Employee(name, address);
-
-        employee.setPaymentType(getPaymentType());
-        employee.setPaymentSchedule(getPaymentSchedule());
-        employee.setPaymentMethod(new HoldMethod(address));
-
+        Employee employee = new Employee(name, address, getPaymentType(), getPaymentSchedule());
         payrollDB.addEmployee(employeeId, employee);
     }
 

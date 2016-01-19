@@ -14,7 +14,7 @@ import static org.junit.Assert.assertTrue;
 public class AddCommissionedEmployeeTest {
 
     private Employee employee;
-    CommissionedPayment commissionedPayment;
+    private CommissionedPayment commissionedPayment;
 
     @Before
     public void setUp() {

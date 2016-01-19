@@ -1,5 +1,7 @@
 package com.mael.payroll;
 
+import com.mael.payroll.paymentSchedules.MonthlySchedule;
+import com.mael.payroll.paymentTypes.MonthlyPayment;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -45,7 +47,7 @@ public class PaycheckTest {
         private LocalDate grossPayForCalledWith;
 
         public SpyEmployee(double gross, double deductions) {
-            super("Fake", "address");
+            super("Fake", "address", new MonthlyPayment(gross), new MonthlySchedule());
 
             this.gross = gross;
             this.deductions = deductions;

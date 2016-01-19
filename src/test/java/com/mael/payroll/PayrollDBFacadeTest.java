@@ -1,5 +1,7 @@
 package com.mael.payroll;
 
+import com.mael.payroll.paymentSchedules.MonthlySchedule;
+import com.mael.payroll.paymentTypes.MonthlyPayment;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,7 +19,7 @@ public class PayrollDBFacadeTest {
         employeeId = 1;
         memberId   = 10;
         payrollDB  = new PayrollDBFacade();
-        employee   = new Employee("name", "address");
+        employee   = new Employee("name", "address", new MonthlyPayment(1000.0), new MonthlySchedule());
         payrollDB.addEmployee(employeeId, employee);
     }
 
