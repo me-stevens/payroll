@@ -7,6 +7,7 @@ import java.time.LocalDate;
 
 import static java.time.LocalDate.of;
 import static java.time.Month.JANUARY;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -36,4 +37,9 @@ public class BiweeklyScheduleTest {
 		LocalDate fridayAndNotBiweekly = of(2016, JANUARY, 29);
         assertFalse(biweeklySchedule.isPayDay(fridayAndNotBiweekly));
 	}
+
+    @Test
+    public void getsTheDaysInThePeriod() {
+        assertEquals(15, biweeklySchedule.getDaysInPeriod());
+    }
 }

@@ -36,7 +36,7 @@ public class HourlyPayment implements PaymentType {
     public double calculatePay(LocalDate payDay, PaymentSchedule paySched) {
         double pay = 0.0;
         for (TimeCard timeCard : timeCards) {
-            if (timeCard.isInPeriod(payDay)) {
+            if (timeCard.isInPeriod(payDay, paySched)) {
                 pay += calculatePayFor(timeCard);
             }
         }

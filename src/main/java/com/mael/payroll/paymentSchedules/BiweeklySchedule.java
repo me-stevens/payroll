@@ -7,9 +7,17 @@ import java.util.Locale;
 import static java.time.DayOfWeek.FRIDAY;
 
 public class BiweeklySchedule implements PaymentSchedule {
+
+    private final int DAYS_IN_PERIOD = 15;
+
     @Override
     public boolean isPayDay(LocalDate date) {
         return isFriday(date) && isBiweekly(date);
+    }
+
+    @Override
+    public int getDaysInPeriod() {
+        return DAYS_IN_PERIOD;
     }
 
     private boolean isFriday(LocalDate date) {

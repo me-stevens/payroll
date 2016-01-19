@@ -1,5 +1,7 @@
 package com.mael.payroll.cards;
 
+import com.mael.payroll.paymentSchedules.PaymentSchedule;
+
 import java.time.LocalDate;
 
 public class TimeCard {
@@ -19,8 +21,15 @@ public class TimeCard {
         return hours;
     }
 
-    public boolean isInPeriod(LocalDate payDay) {
-        int daysInPeriod = 5;
-        return getDate().isAfter(payDay.minusDays(daysInPeriod));
+    public boolean isInPeriod(LocalDate payDay, PaymentSchedule paySched) {
+        return isAfter(payDay, paySched) && isBefore(payDay);
+    }
+
+    private boolean isAfter(LocalDate payDay, PaymentSchedule paySched) {
+        return date.isAfter(payDay.minusDays(paySched.getDaysInPeriod()));
+    }
+
+    private boolean isBefore(LocalDate payDay) {
+        return date.isBefore(payDay.plusDays(1));
     }
 }

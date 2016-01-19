@@ -7,6 +7,7 @@ import java.time.LocalDate;
 
 import static java.time.Month.JANUARY;
 import static junit.framework.TestCase.assertFalse;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class MonthlyScheduleTest {
@@ -28,5 +29,10 @@ public class MonthlyScheduleTest {
     public void itIsNotPayDayIfNotLastDayOfMonth() {
         LocalDate notLastDayOfMonth = LocalDate.of(2016, JANUARY, 30);
         assertFalse(monthlySchedule.isPayDay(notLastDayOfMonth));
+    }
+
+    @Test
+    public void getsTheDaysInThePeriod() {
+        assertEquals(30, monthlySchedule.getDaysInPeriod());
     }
 }

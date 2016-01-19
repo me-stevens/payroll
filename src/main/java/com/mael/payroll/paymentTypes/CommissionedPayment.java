@@ -38,7 +38,7 @@ public class CommissionedPayment implements PaymentType {
     public double calculatePay(LocalDate payDay, PaymentSchedule paySched) {
         double pay = 0.0;
         for(SalesCard salesCard : salesCards) {
-            if (salesCard.isInPeriod(payDay)) {
+            if (salesCard.isInPeriod(payDay, paySched)) {
                 pay += calculatePayFor(salesCard);
             }
         }
