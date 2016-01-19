@@ -8,9 +8,13 @@ public class Paycheck {
     private double netPay;
 
     public Paycheck(LocalDate date, Employee employee) {
-        this.date = date;
+        this.date     = date;
         this.employee = employee;
         calculateNetPay();
+    }
+
+    public String getName() {
+        return employee.getName();
     }
 
     public LocalDate getDate() {
