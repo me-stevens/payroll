@@ -43,6 +43,17 @@ public class HourlyPayment implements PaymentType {
         return pay;
     }
 
+    @Override
+    public double getDaysWorked(LocalDate payDay, PaymentSchedule paySched) {
+        int hours = 0;
+        for (TimeCard timeCard : timeCards) {
+            if (timeCard.isInPeriod(payDay, paySched)) {
+                hours += timeCard.getHours();
+            }
+        }
+        return hours / MAX_HOURS_PER_DAY;
+    }
+
     private double calculatePayFor(TimeCard timeCard) {
         double extraHours = Math.max(timeCard.getHours() - MAX_HOURS_PER_DAY, 0.0);
         return timeCard.getHours() * hourlyRate + extraHours * hourlyRate * BONUS;

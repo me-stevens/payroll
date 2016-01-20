@@ -64,6 +64,11 @@ public class CommissionedPaymentTest {
         assertPay(monthlyRate + (amount * commission / 100.0));
     }
 
+    @Test
+    public void getsTheDaysWorked() {
+        assertEquals(biWeekly.getDaysInPeriod(), commissionedPayment.getDaysWorked(fridayAndBiweekly, biWeekly), 0.001);
+    }
+
     private void assertPay(double expectedPay) {
         assertEquals(expectedPay, commissionedPayment.calculatePay(fridayAndBiweekly, biWeekly), 0.001);
     }

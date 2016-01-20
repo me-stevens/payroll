@@ -33,7 +33,7 @@ public class PaycheckTest {
     public void getsTimeWorked() {
         employee = new SpyEmployee(200, 0);
         paycheck = new Paycheck(payday, employee);
-        assertEquals(15, paycheck.getDaysWorked());
+        assertEquals(15, paycheck.getDaysWorked(), 0.001);
         assertTrue(employee.getDaysWorkedWasCalled());
     }
 
@@ -81,7 +81,7 @@ public class PaycheckTest {
         }
 
         @Override
-        public int getDaysWorked() {
+        public double getDaysWorked(LocalDate date) {
             getDaysWorkedWasCalled = true;
             return 15;
         }

@@ -47,10 +47,10 @@ public class PayrollApp {
         System.out.println("----------------------------");
         System.out.println("  For pay day: " + payDay + "\n");
 
-        System.out.println("NAME \t TIME (days) \t AMOUNT (£)");
+        System.out.println("NAME \t\t DAYS \t\t AMOUNT (£)");
 
         for(Map.Entry<Integer, Paycheck> cheque : transaction.getPayChecks().entrySet()) {
-            System.out.printf("%s %11d %15.2f \n",
+            System.out.printf("%-10s %5.1f %15.2f \n",
                     cheque.getValue().getName(),
                     cheque.getValue().getDaysWorked(),
                     cheque.getValue().getNetPay());

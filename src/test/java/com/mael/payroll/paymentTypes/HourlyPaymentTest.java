@@ -79,6 +79,22 @@ public class HourlyPaymentTest {
         assertPay(hours * hourlyRate);
     }
 
+    @Test
+    public void ifNoCardsTheDaysWorkedAreZero() {
+        assertEquals(0.0, hourlyPayment.getDaysWorked(friday, weekly), 0.001);
+    }
+
+    @Test
+    public void ifCardsTheDaysWorkedAreTheSumOfHours() {
+        LocalDate monday = of(2016, JANUARY, 25);
+        hourlyPayment.addTimeCard(new TimeCard(monday, hours));
+
+        LocalDate tuesday = of(2016, JANUARY, 26);
+        hourlyPayment.addTimeCard(new TimeCard(tuesday, hours));
+
+        assertEquals(2, hourlyPayment.getDaysWorked(friday, weekly), 0.001);
+    }
+
     private void assertPay(double expectedPay) {
         assertEquals(expectedPay, hourlyPayment.calculatePay(friday, weekly), 0.001);
     }

@@ -19,4 +19,9 @@ public class MonthlyPayment implements PaymentType {
     public double calculatePay(LocalDate payDay, PaymentSchedule paySched) {
         return getMonthlyRate();
     }
+
+    @Override
+    public double getDaysWorked(LocalDate payDay, PaymentSchedule paySched) {
+        return paySched.getDaysInPeriod();
+    }
 }

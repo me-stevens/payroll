@@ -21,8 +21,8 @@ public class Paycheck {
         return employee.getName();
     }
 
-    public int getDaysWorked() {
-        return employee.getDaysWorked();
+    public double getDaysWorked() {
+        return employee.getDaysWorked(date);
     }
 
     public double getNetPay() {

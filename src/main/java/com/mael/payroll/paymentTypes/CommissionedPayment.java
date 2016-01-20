@@ -45,6 +45,11 @@ public class CommissionedPayment implements PaymentType {
         return pay;
     }
 
+    @Override
+    public double getDaysWorked(LocalDate payDay, PaymentSchedule paySched) {
+        return paySched.getDaysInPeriod();
+    }
+
     private double calculatePayFor(SalesCard salesCard) {
         return getMonthlyRate() + (salesCard.getAmount() * getCommission() / 100.0);
     }
