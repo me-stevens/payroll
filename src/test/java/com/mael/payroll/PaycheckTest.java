@@ -30,6 +30,14 @@ public class PaycheckTest {
     }
 
     @Test
+    public void getsTimeWorked() {
+        employee = new SpyEmployee(200, 0);
+        paycheck = new Paycheck(payday, employee);
+        assertEquals(15, paycheck.getDaysWorked());
+        assertTrue(employee.getDaysWorkedWasCalled());
+    }
+
+    @Test
     public void employeeWithNoDeductionsGetsPaid() {
         employee = new SpyEmployee(500, 0);
         paycheck = new Paycheck(payday, employee);
@@ -50,12 +58,14 @@ public class PaycheckTest {
         private double deductions;
         private LocalDate deductionsForCalledWith;
         private LocalDate grossPayForCalledWith;
+        private boolean getDaysWorkedWasCalled;
 
         public SpyEmployee(double gross, double deductions) {
             super("Fake", "address", null, null);
 
             this.gross = gross;
             this.deductions = deductions;
+            getDaysWorkedWasCalled = false;
         }
 
         @Override
@@ -70,12 +80,21 @@ public class PaycheckTest {
             return gross;
         }
 
+        @Override
+        public int getDaysWorked() {
+            getDaysWorkedWasCalled = true;
+            return 15;
+        }
+
         boolean deductionsForCalledWith(LocalDate date) {
             return date == deductionsForCalledWith;
         }
 
         boolean grossPayForCalledWith(LocalDate date) {
             return date == grossPayForCalledWith;
+        }
+        boolean getDaysWorkedWasCalled() {
+            return getDaysWorkedWasCalled;
         }
     }
 }

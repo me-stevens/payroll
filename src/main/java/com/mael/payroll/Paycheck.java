@@ -13,12 +13,16 @@ public class Paycheck {
         calculateNetPay();
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
     public String getName() {
         return employee.getName();
     }
 
-    public LocalDate getDate() {
-        return date;
+    public int getDaysWorked() {
+        return employee.getDaysWorked();
     }
 
     public double getNetPay() {

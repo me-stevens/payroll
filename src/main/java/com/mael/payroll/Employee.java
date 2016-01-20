@@ -79,6 +79,10 @@ public class Employee {
         return paymentSchedule.isPayDay(date);
     }
 
+    public int getDaysWorked() {
+        return paymentSchedule.getDaysInPeriod();
+    }
+
     public double grossPayFor(LocalDate date) {
         return paymentType.calculatePay(date, paymentSchedule);
     }
