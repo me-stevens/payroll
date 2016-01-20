@@ -88,6 +88,6 @@ public class Employee {
     }
 
     public double deductionsFor(LocalDate date) {
-        return affiliation.calculateDeductions(date);
+        return affiliation.calculateDeductions(date, paymentSchedule);
     }
 }

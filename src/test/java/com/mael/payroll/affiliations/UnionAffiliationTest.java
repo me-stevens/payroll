@@ -1,6 +1,7 @@
 package com.mael.payroll.affiliations;
 
 import com.mael.payroll.cards.AffiliationCard;
+import com.mael.payroll.paymentSchedules.WeeklySchedule;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,11 +17,13 @@ public class UnionAffiliationTest {
     private UnionAffiliation unionAffiliation;
     private LocalDate friday;
     private double charges;
+    private WeeklySchedule weekly;
 
     @Before
     public void setUp() {
         fees             = 100.0;
         unionAffiliation = new UnionAffiliation(fees);
+        weekly           = new WeeklySchedule();
         friday           = of(2016, JANUARY, 29);
         charges          = 50.0;
     }
@@ -53,6 +56,6 @@ public class UnionAffiliationTest {
     }
 
     private void assertDeductions(double deductions) {
-        assertEquals(deductions, unionAffiliation.calculateDeductions(friday), 0.001);
+        assertEquals(deductions, unionAffiliation.calculateDeductions(friday, weekly), 0.001);
     }
 }

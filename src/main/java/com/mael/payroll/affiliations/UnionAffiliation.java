@@ -1,6 +1,7 @@
 package com.mael.payroll.affiliations;
 
 import com.mael.payroll.cards.AffiliationCard;
+import com.mael.payroll.paymentSchedules.PaymentSchedule;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -22,8 +23,8 @@ public class UnionAffiliation implements Affiliation {
     }
 
     @Override
-    public double calculateDeductions(LocalDate payDay) {
-        return getFees() + getCharges(payDay);
+    public double calculateDeductions(LocalDate payDay, PaymentSchedule paySched) {
+        return getFees() + getCharges(payDay, paySched);
     }
 
     public void addAffiliationCard(AffiliationCard affiliationCard) {
@@ -34,17 +35,13 @@ public class UnionAffiliation implements Affiliation {
         return affiliationCards;
     }
 
-    private double getCharges(LocalDate payDay) {
+    private double getCharges(LocalDate payDay, PaymentSchedule paySched) {
         double charges = 0.0;
         for (AffiliationCard affiliationCard : affiliationCards) {
-            if (isInPeriod(payDay, affiliationCard)) {
+            if (affiliationCard.isInPeriod(payDay, paySched)) {
                 charges += affiliationCard.getCharges();
             }
         }
         return charges;
-    }
-
-    private boolean isInPeriod(LocalDate payDay, AffiliationCard affiliationCard) {
-        return affiliationCard.getDate().isAfter(payDay.minusDays(5));
     }
 }

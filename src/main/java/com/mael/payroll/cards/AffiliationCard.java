@@ -2,17 +2,12 @@ package com.mael.payroll.cards;
 
 import java.time.LocalDate;
 
-public class AffiliationCard {
-    private LocalDate date;
+public class AffiliationCard extends Card {
     private double charges;
 
     public AffiliationCard(LocalDate date, double charges) {
-        this.date    = date;
+        super(date);
         this.charges = charges;
-    }
-
-    public LocalDate getDate() {
-        return date;
     }
 
     public double getCharges() {
